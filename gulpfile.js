@@ -15,14 +15,29 @@ var browserify  = require('browserify');
 var watchify    = require('watchify');
 var babel       = require('babelify');
 
-// var runSequence = require('run-sequence');
-
-// tasks
 gulp.task('lint', function() {
   return gulp.src(['./app/**/*.js'])
-    .pipe(eslint())
+    .pipe(eslint({
+      'ecmaFeatures': {
+        'arrowFunctions': true,
+        'blockBindings': true,
+        'classes': true,
+        'defaultParams': true,
+        'destructuring': true,
+        'forOf': true,
+        'generators': false,
+        'modules': true,
+        'objectLiteralComputedProperties': true,
+        'objectLiteralDuplicateProperties': false,
+        'objectLiteralShorthandMethods': true,
+        'objectLiteralShorthandProperties': true,
+        'restParams': true,
+        'spread': true,
+        'superInFunctions': true,
+        'templateStrings': true
+      }
+    }))
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
 });
 
 gulp.task('clean', function() {
@@ -35,7 +50,9 @@ gulp.task('build', function () {
 
     function rebundle() {
       return bundler
-        .transform(babel)
+        .transform(babel.configure({
+          presets: ["es2015", "stage-0"]
+        }))
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('dist'));
@@ -47,20 +64,21 @@ gulp.task('build', function () {
     rebundle();
 });
 
-gulp.task('watch', ['build'], function () {
-    gulp.watch('*.js', ['build']);
+gulp.task('watch', ['connect', 'lint', 'build'], function () {
+    gulp.watch('./app/**/*.js', ['lint', 'build']);
+});
+
+gulp.task('connect', function () {
+  connect.server({
+    port: 3000
+  });
 });
 
 gulp.task('inject', function () {
   var target = gulp.src('index.html');
   var sources = gulp.src('./dist/*.js', { read: false });
   return target.pipe(inject(sources))
-    .pipe(gulp.dest('./app'));
+    .pipe(gulp.dest('./'));
 });
 
-gulp.task('connect', function () {
-  connect.server({
-    root: 'app/app.module',
-    port: 3000
-  });
-});
+

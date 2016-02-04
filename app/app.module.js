@@ -1,27 +1,11 @@
-var angular = require('angular');
+import angular from 'angular';
+import ngRoute from 'angular-route';
+import routes from './app.routes';
+import controllers from './controllers';
 
 angular
-  .module('groceryList', ['ngRoute'])
-  .config(function($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
-    // routes
-    $routeProvider
-      .when("/", {
-        templateUrl: "./partials/partial1.html",
-        controllerAs: "Main",
-        controller: "MainController"
-      })
-      .otherwise({
-         redirectTo: '/s'
-      });
-    }
-  );
-
-  //Load controller
-  angular.module('groceryList')
-
-  .controller('MainController', function($scope) {
-    Main.test = "Testing...";
-  });
-
-function test() { 'test'; }
+  .module('app', [
+    ngRoute,
+    'app.controllers',
+    'app.routes'
+  ]);
