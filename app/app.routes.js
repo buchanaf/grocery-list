@@ -7,7 +7,7 @@ angular
     $routeProvider
       .when("/", {
         templateUrl: "app/views/home.html",
-        controllerAs: "Home",
+        controllerAs: "home",
         controller: "HomeController"
       })
       .otherwise({
