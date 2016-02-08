@@ -8,7 +8,7 @@
     </label>
   </form>
   <ul>
-    <li ng-repeat="food in home.searchResults">
+    <li ng-repeat="food in home.searchResults track by food.id">
       {{food.text}}
     </li>
   </ul>
