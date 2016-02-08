@@ -7,4 +7,10 @@
       <input ng-change="home.onchange()" ng-model="home.search" type="text" placeholder="Search Food" />
     </label>
   </form>
+  <ul>
+    <li ng-repeat="food in home.searchResults">
+      {{food.text}}
+    </li>
+  </ul>
+</div>
 </div>

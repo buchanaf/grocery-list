@@ -4,6 +4,7 @@ export default function homeController(HomeService) {
 
   this.changeSuccess = (res) => {
     this.searchResults = res.data;
+    console.log(res.data);
   }
 
   this.changeFail = (err) => {

@@ -1,20 +1,36 @@
 import request from 'superagent';
 import config from '../config';
+import { client } from '../app';
 
-export default function foodController(req, res) {
+function getFoodQuery(query) {
   return new Promise(function(resolve, reject) {
     request
       .get('https://apibeta.nutritionix.com/v2/autocomplete')
-      .query(req.query)
+      .query(query)
       .set({'X-APP-ID': config.appId})
       .set({'X-APP-KEY': config.appKey})
       .end(function(err, results) {
         if (err) {
-          res.json(err);
+          reject(err);
         } else {
-          res.json({data: results.body});
+          client.setAsync(query, JSON.stringify(results.body))
+          resolve(results.body);
         }
-        resolve();
       });
   });
 }
+
+export default function foodController(req, res) {
+  const query = req.query;
+  client.getAsync(query).then(function(err, results) {
+    if (results) {
+      return res.json(results)
+    }
+    return getFoodQuery(query);
+  }).then(function(results) {
+    res.json(results);
+  }).catch(function(err){
+    res.json(err)
+  });
+}
+
