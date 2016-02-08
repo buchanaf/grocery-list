@@ -64,13 +64,13 @@ gulp.task('build', function () {
     rebundle();
 });
 
-gulp.task('watch', ['connect', 'lint', 'build'], function () {
+gulp.task('watch', ['lint', 'build'], function () {
     gulp.watch('./app/**/*.js', ['lint', 'build']);
 });
 
 gulp.task('connect', function () {
   connect.server({
-    port: 3000
+    port: 3000,
   });
 });
 

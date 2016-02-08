@@ -1,6 +1,10 @@
-
-<h1>
-adfsasdfasdf
-</h1>
-<p>This is the partial for view 1.</p>
-<span> TESTING </span>
+<div class="content" ng-controller="HomeController">
+  <h1 className="content__header">
+  Grocery List
+  </h1>
+  <form class="grocery__form">
+    <label class="grocery__label">
+      <input ng-change="home.onchange()" ng-model="home.search" type="text" placeholder="Search Food" />
+    </label>
+  </form>
+</div>
