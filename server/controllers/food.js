@@ -13,8 +13,8 @@ function getFoodQuery(query) {
         if (err) {
           reject(err);
         } else {
-          client.setAsync(query, JSON.stringify(results.body))
           resolve(results.body);
+          client.setAsync(query.q, JSON.stringify(results.body))
         }
       });
   });

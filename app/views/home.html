@@ -1,16 +1,27 @@
-<div class="content" ng-controller="HomeController">
+<div class="content__container" ng-controller="HomeController" layout="column" ng-cloak>
+  <md-content class="md-padding">
   <h1 className="content__header">
   Grocery List
   </h1>
-  <form class="grocery__form">
-    <label class="grocery__label">
-      <input ng-change="home.onchange()" ng-model="home.search" type="text" placeholder="Search Food" />
-    </label>
+  <form ng-submit="$event.preventDefault()">
+    <md-autocomplete
+        md-search-text="home.searchText"
+        md-items="item in home.querySearch(home.searchText)"
+        md-item-text="item.text"
+        md-min-length="0"
+        placeholder="Find food">
+      <md-item-template>
+        <span md-highlight-text="home.searchText" md-highlight-flags="^i">{{item.text}}</span>
+      </md-item-template>
+      <md-not-found>
+        <div ng-if="food.searchText">
+          No results for "{{home.searchText}}".
+        </div>
+        <div ng-if="!food.searchText">
+          Search food.
+        </div>
+      </md-not-found>
+    </md-autocomplete>
   </form>
-  <ul>
-    <li ng-repeat="food in home.searchResults track by food.id">
-      {{food.text}}
-    </li>
-  </ul>
-</div>
+  </md-content>
 </div>
