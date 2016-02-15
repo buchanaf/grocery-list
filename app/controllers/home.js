@@ -1,18 +1,21 @@
 export default function homeController(HomeService) {
-  this.search = '';
+  this.searchText = '';
+  this.test = false;
   this.searchResults = [];
+  this.cache = true;
+
 
   this.changeSuccess = (res) => {
-    this.searchResults = res.data;
-    console.log(res.data);
+    return res.data;
   }
 
   this.changeFail = (err) => {
-    console.log(err);
+    return [];
   }
 
-  this.onchange = () => {
-    HomeService.getFoodOptions(this.search)
+  this.querySearch = (query) => {
+    if (query === '') { return []; }
+    return HomeService.getFoodOptions(query)
       .then(this.changeSuccess, this.changeFail);
   }
 }

@@ -13,8 +13,8 @@ function getFoodQuery(query) {
         if (err) {
           reject(err);
         } else {
-          client.setAsync(query, JSON.stringify(results.body))
           resolve(results.body);
+          client.setAsync(query.q, JSON.stringify(results.body))
         }
       });
   });
@@ -22,11 +22,12 @@ function getFoodQuery(query) {
 
 export default function foodController(req, res) {
   const query = req.query;
-  client.getAsync(query).then(function(err, results) {
+  client.getAsync(query.q).then(function(results, err) {
     if (results) {
-      return res.json(results)
+      return JSON.parse(results);
+    } else {
+      return getFoodQuery(query);
     }
-    return getFoodQuery(query);
   }).then(function(results) {
     res.json(results);
   }).catch(function(err){

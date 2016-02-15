@@ -76,7 +76,7 @@ gulp.task('connect', function () {
 
 gulp.task('inject', function () {
   var target = gulp.src('index.html');
-  var sources = gulp.src('./dist/*.js', { read: false });
+  var sources = gulp.src(['./dist/*.js', './assets/css/**/*.css', './node_modules/angular-material/angular-material.css'], { read: false });
   return target.pipe(inject(sources))
     .pipe(gulp.dest('./'));
 });
