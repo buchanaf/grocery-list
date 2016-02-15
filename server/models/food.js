@@ -1,5 +1,5 @@
 import Bookshelf from '../db';
 
-const Food = Bookshelf.Model.extend({
+export default Bookshelf.Model.extend({
     tableName: 'food'
 });

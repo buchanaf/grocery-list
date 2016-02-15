@@ -5,6 +5,7 @@ import controllers from './controllers';
 import config from './config'
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import passport from 'passport';
 import path from 'path';
 import redis from 'redis';
 import session from 'express-session';
@@ -21,8 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(controllers);
 app.use(cookieParser());
-app.use(bodyParser());
-app.use(session({ secret: 'cookie-monster' }));
+app.use(session({ secret: 'cookie-monster', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
