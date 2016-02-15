@@ -10,6 +10,11 @@ angular
         controllerAs: "home",
         controller: "HomeController"
       })
+      .when("/login", {
+        templateUrl: "app/views/login.html",
+        controllerAs: "login",
+        controller: "LoginController"
+      })
       .otherwise({
          redirectTo: '/'
       });
