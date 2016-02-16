@@ -4,6 +4,10 @@ export default function homeController(HomeService) {
   this.searchResults = [];
   this.cache = true;
 
+  this.facebookLogin = () => {
+    console.log('here')
+    HomeService.facebookLogin();
+  }
 
   this.changeSuccess = (res) => {
     return res.data;

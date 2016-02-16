@@ -1,6 +1,5 @@
 
 exports.up = function(knex, Promise) {
-  console.log(knex.schema);
   return Promise.all([
     knex.schema.table('users', function(table) {
       table.string('username').notNullable();
