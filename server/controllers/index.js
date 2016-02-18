@@ -8,6 +8,7 @@ const router = express.Router();
 router.use('/api/food', food)
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
   res.redirect(req.session.returnTo || '/');
 });

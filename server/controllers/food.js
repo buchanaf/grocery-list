@@ -21,6 +21,7 @@ function getFoodQuery(query) {
 }
 
 export default function foodController(req, res) {
+
   const query = req.query;
   client.getAsync(query.q).then(function(results, err) {
     if (results) {
