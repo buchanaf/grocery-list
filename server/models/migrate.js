@@ -1,5 +1,4 @@
 require('babel-polyfill');
-
 const Schema = require('./schema');
 const knex = require('../db').knex;
 

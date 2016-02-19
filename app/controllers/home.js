@@ -1,11 +1,11 @@
 export default function homeController(HomeService) {
   this.searchText = '';
   this.test = false;
+  this.selectedItem = null;
   this.searchResults = [];
   this.cache = true;
 
   this.facebookLogin = () => {
-    console.log('here')
     HomeService.facebookLogin();
   }
 
@@ -15,6 +15,19 @@ export default function homeController(HomeService) {
 
   this.changeFail = (err) => {
     return [];
+  }
+
+  this.foodAddSuccess = (res) => {
+    console.log(res);
+  }
+
+  this.foodAddFail = (err) => {
+    console.log(err);
+  }
+
+  this.selectedItemChange = (item) => {
+    return HomeService.postFoodItem(item)
+      .then(this.foodAddSuccess, this.foodAddFail);
   }
 
   this.querySearch = (query) => {

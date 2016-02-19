@@ -13,13 +13,22 @@ module.exports = function(passport) {
       User.forge({facebook_id: profile.id})
         .fetch()
         .then(function (user) {
-          cb(null, user);
-          // user.save({
-
-          // })
+          if (user) {
+            cb(null, user);
+            return Promise.reject(user)
+          }
+          return User.forge({
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            facebook_id: profile.id,
+            username: profile.emails[0].value,
+          }).save();
         })
-        .catch(function (err) {
-          console.log(err);
+        .then(function(user) {
+          cb(null, user);
+        })
+        .catch(function(err) {
+          console.log(err)
         });
     }));
 

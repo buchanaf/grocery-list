@@ -5,6 +5,9 @@ export default function homeService($interval, $log, $http) {
     },
     facebookLogin: function(query) {
       return $http.get('/auth/facebook');
-    }
+    },
+    postFoodItem: function(item) {
+      return $http.post('/api/food', item);
+    },
   }
 }
