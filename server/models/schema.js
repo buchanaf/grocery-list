@@ -1,12 +1,13 @@
 var Schema = {
   users: {
     id: { type: 'increments', nullable: false, primary: true },
+    facebook_id: { type: 'string', maxlength: 254, nullable: false, unique: true },
     email: { type: 'string', maxlength: 254, nullable: false, unique: true },
     name: { type: 'string', maxlength: 150, nullable: false }
   },
   food: {
     id: { type: 'increments', nullable: false, primary: true },
-    name: { type: 'string', maxlength: 150, nullable: false }
+    name: { type: 'string', maxlength: 150, nullable: false },
   },
   lists: {
     id: { type: 'increments', nullable: false, primary: true },

@@ -1,5 +1,9 @@
 import Bookshelf from '../db.js';
+import Food from './food';
 
-const User = Bookshelf.Model.extend({
-  tableName: 'users',
+export default Bookshelf.Model.extend({
+  tableName: 'lists',
+  food: function() {
+    return this.belongsToMany(Food);
+  }
 });
