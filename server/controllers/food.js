@@ -1,5 +1,6 @@
 import request from 'superagent';
 import config from '../config';
+import { FoodCollection } from '../models/food';
 import { client } from '../app';
 
 function getFoodQuery(query) {
@@ -14,7 +15,14 @@ function getFoodQuery(query) {
           reject(err);
         } else {
           resolve(results.body);
-          client.setAsync(query.q, JSON.stringify(results.body))
+          const foodItems = FoodCollection.forge([
+            ...results.body.map((food) => ({ name: food.text, food_id: food.id })),
+          ]);
+          Promise.all(foodItems.invoke('save')).then(function(res, err) {
+            console.log(res, err);
+          });
+
+          // client.setAsync(query.q, JSON.stringify(results.body))
         }
       });
   });
@@ -22,7 +30,8 @@ function getFoodQuery(query) {
 
 export default function foodController(req, res) {
   const query = req.query;
-  client.getAsync(query.q).then(function(results, err) {
+  // client.getAsync(query.q).then(function(results, err) {
+  Promise.resolve().then(function(results) {
     if (results) {
       return JSON.parse(results);
     } else {
