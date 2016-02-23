@@ -41,7 +41,6 @@ function createTable(tableName) {
         column.defaultTo(Schema[tableName][key].defaultTo);
       }
     });
-    console.log(column);
   });
 }
 
@@ -58,17 +57,8 @@ function createTables () {
 
 createTables()
   .then(function() {
-    console.log('here');
     process.exit(0);
   })
   .catch(function (error) {
     throw error;
   });
-
-// (function(){
-//   // console.log('here');
-//   return knex.schema.dropTable('users')
-//     .dropTable('food')
-//     .dropTable('lists');
-
-// }());

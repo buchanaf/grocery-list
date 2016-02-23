@@ -25,6 +25,19 @@ export default function homeController(HomeService) {
     console.log(err);
   }
 
+  this.listAddSuccess = (res) => {
+    console.log(res);
+  }
+
+  this.listAddFail = (err) => {
+    console.log(err);
+  }
+
+  this.addList = () => {
+    return HomeService.addList()
+      .then(this.listAddSuccess, this.listAddFail)
+  }
+
   this.selectedItemChange = (item) => {
     return HomeService.postFoodItem(item)
       .then(this.foodAddSuccess, this.foodAddFail);

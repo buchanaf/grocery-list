@@ -1,7 +1,8 @@
 import request from 'superagent';
 import config from '../config';
-import { FoodCollection } from '../models/food';
+import { Foods, Food } from '../models/foods';
 import { client } from '../app';
+import { List }  from '../models/lists';
 
 function getFoodQuery(query) {
   return new Promise(function(resolve, reject) {
@@ -15,20 +16,17 @@ function getFoodQuery(query) {
           reject(err);
         } else {
           resolve(results.body);
-          const foodItems = FoodCollection.forge([
+          const foodItems = Foods.forge([
             ...results.body.map((food) => ({ name: food.text, food_id: food.id })),
           ]);
-          Promise.all(foodItems.invoke('save')).then(function(res, err) {
-            console.log(res, err);
-          });
-
+          Promise.all(foodItems.invoke('save'));
           // client.setAsync(query.q, JSON.stringify(results.body))
         }
       });
   });
 }
 
-export default function foodController(req, res) {
+export function foodQuery(req, res) {
   const query = req.query;
   // client.getAsync(query.q).then(function(results, err) {
   Promise.resolve().then(function(results) {
@@ -44,3 +42,16 @@ export default function foodController(req, res) {
   });
 }
 
+export function addToList(req, res) {
+  List.forge({
+    id: 1,
+  })
+  .fetch()
+  .then(function(list) {
+    list.load(['foods'])
+      .then(function(model) {
+        model.foods().attach([req.body.id]);
+        res.json({ model, list });
+      });
+  });
+}

@@ -8,6 +8,9 @@
       <a target="_self" href="/auth/facebook">
         Facebook
       </a>
+      <button ng-click="home.addList()">
+        Add List
+      </button>
       <form ng-submit="$event.preventDefault()">
         <md-autocomplete
             md-search-text="home.searchText"

@@ -9,5 +9,8 @@ export default function homeService($interval, $log, $http) {
     postFoodItem: function(item) {
       return $http.post('/api/food', item);
     },
+    addList: function(item) {
+      return $http.post('/api/list');
+    },
   }
 }
