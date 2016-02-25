@@ -6,6 +6,10 @@ import passport from 'passport';
 
 const router = express.Router();
 
+router.use(function(req, res) {
+  res.redirect('/login');
+});
+
 router.route('/api/food')
   .get(foodQuery)
   .post(addToList)

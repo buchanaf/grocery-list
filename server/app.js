@@ -19,6 +19,7 @@ require('./config/passport')(passport);
 
 app.use(express.static(path.join(__dirname, '..')));
 app.use(compression());
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -26,6 +27,7 @@ app.use(session({ secret: 'cookie-monster', resave: true, saveUninitialized: tru
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(controllers);
+
 
 app.listen(config.port, function() {
   console.log('Listening on port ' + config.port)

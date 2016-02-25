@@ -1,10 +1,10 @@
 import Bookshelf from '../db';
-import List from './lists';
+import { List } from './lists';
 
 export const Food = Bookshelf.Model.extend({
   tableName: 'foods',
   lists: function () {
-    return this.belongsToMany(Lists);
+    return this.belongsToMany(List);
   },
 });
 

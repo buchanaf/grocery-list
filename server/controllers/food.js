@@ -42,16 +42,28 @@ export function foodQuery(req, res) {
   });
 }
 
-export function addToList(req, res) {
+export function addToList(req, res, next) {
+  if(!parseInt(req.body.id, 10)) {
+    return next();
+  }
   List.forge({
     id: 1,
   })
   .fetch()
   .then(function(list) {
-    list.load(['foods'])
-      .then(function(model) {
-        model.foods().attach([req.body.id]);
-        res.json({ model, list });
-      });
+    Food.forge({
+      food_id: req.body.id,
+    })
+    .fetch()
+    .then((food) => {
+      list.load(['foods'])
+        .then(function(model) {
+          console.log(food)
+          model.foods().attach([food.id]).then(function(final){
+            res.json({ model, list, final });
+          });
+
+        });
+    });
   });
 }
