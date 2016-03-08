@@ -4,3 +4,11 @@
   height: 100vh;
   width: 1000px;
 }
+
+.button {
+  vertical-align: top;
+}
+
+.search {
+  margin-top: 3rem;
+}

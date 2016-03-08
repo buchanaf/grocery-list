@@ -1,5 +1,5 @@
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import User from '../models/users';
+import { User } from '../models/users';
 
 module.exports = function(passport) {
   passport.use(new FacebookStrategy({
@@ -28,7 +28,7 @@ module.exports = function(passport) {
           cb(null, user);
         })
         .catch(function(err) {
-          console.log(err)
+          // console.log('err', err)
         });
     }));
 

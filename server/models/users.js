@@ -1,6 +1,6 @@
 import Bookshelf from '../db.js';
 
-export default Bookshelf.Model.extend({
+export const User = Bookshelf.Model.extend({
   tableName: 'users',
 });
 

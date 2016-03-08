@@ -1,11 +1,22 @@
 import express from 'express';
-import food from './food';
+import { foodQuery, addToList } from './food';
+import { addNewList } from './list';
 import path from 'path';
 import passport from 'passport';
 
 const router = express.Router();
 
-router.use('/api/food', food)
+router.use(function(req, res) {
+  res.redirect('/login');
+});
+
+router.route('/api/food')
+  .get(foodQuery)
+  .post(addToList)
+
+router.route('/api/list')
+  .post(addNewList)
+
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 
