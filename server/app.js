@@ -13,9 +13,10 @@ import session from 'express-session';
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
+require('./config/passport')(passport);
+
 const app = express();
 const client = redis.createClient();
-require('./config/passport')(passport);
 
 app.use(express.static(path.join(__dirname, '..')));
 app.use(compression());
