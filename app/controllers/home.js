@@ -1,4 +1,4 @@
-export default function homeController(HomeService) {
+export default function homeController(HomeService, AuthService) {
   this.searchText = '';
   this.test = false;
   this.selectedItem = null;
@@ -49,3 +49,4 @@ export default function homeController(HomeService) {
       .then(this.changeSuccess, this.changeFail);
   }
 }
+
