@@ -33,10 +33,18 @@ module.exports = function(passport) {
     }));
 
   passport.serializeUser(function(user, cb) {
+    console.log('serialize', user);
     cb(null, user);
   });
 
-  passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
+  passport.deserializeUser(function(user, cb) {
+    User.forge({
+      id: user.id,
+    })
+    .fetch()
+    .then(function(user) {
+      console.log('deserialize', user);
+      cb(null, user);
+    });
   });
 };

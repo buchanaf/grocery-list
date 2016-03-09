@@ -9,6 +9,7 @@ import passport from 'passport';
 import path from 'path';
 import redis from 'redis';
 import session from 'express-session';
+import redisSession  from 'connect-redis';
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -17,6 +18,13 @@ require('./config/passport')(passport);
 
 const app = express();
 const client = redis.createClient();
+const persistSession = redisSession(session);
+const RedisStore = new persistSession({
+  host: '127.0.0.1',
+  port: 6379,
+  prefix: 'session',
+  pass: 'cookies',
+});
 
 app.use(express.static(path.join(__dirname, '..')));
 app.use(compression());
@@ -24,7 +32,7 @@ app.use(compression());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({ secret: 'cookie-monster', resave: true, saveUninitialized: true }));
+app.use(session({ store: RedisStore, secret: 'cookie-monster', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(controllers);

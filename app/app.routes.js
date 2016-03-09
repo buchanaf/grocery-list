@@ -8,7 +8,12 @@ angular
       .when("/", {
         templateUrl: "app/views/home.html",
         controllerAs: "home",
-        controller: "HomeController"
+        controller: "HomeController",
+        resolve: {
+          initialData: function(InitializeService) {
+            return InitializeService();
+          }
+        }
       })
       .when("/login", {
         templateUrl: "app/views/login.html",

@@ -60,6 +60,7 @@
     "bluebird": "^3.2.2",
     "bookshelf": "^0.9.1",
     "compression": "^1.6.1",
+    "connect-redis": "^3.0.2",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",

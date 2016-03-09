@@ -13,7 +13,7 @@ export default function authService($interval, $log, $http) {
   }
 
   this.returnUser = function() {
-    return console.log('testing');
+    return user;
   }
 
   return this;

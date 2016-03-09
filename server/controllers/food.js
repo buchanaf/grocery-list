@@ -58,9 +58,10 @@ export function addToList(req, res, next) {
     .then((food) => {
       list.load(['foods'])
         .then(function(model) {
-          console.log(food)
-          model.foods().attach([food.id]).then(function(final){
-            res.json({ model, list, final });
+          model.foods().attach([food.id])
+            .then(function(foodJoin) {
+              console.log(foodJoin.model)
+              res.json({ list, model, food, list });
           });
 
         });

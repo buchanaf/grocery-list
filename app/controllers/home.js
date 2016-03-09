@@ -1,4 +1,8 @@
-export default function homeController(HomeService, AuthService) {
+export default function homeController(HomeService, AuthService, initialData, $location) {
+  if (initialData.user.user === null) {
+    $location.path('/login')
+  }
+
   this.searchText = '';
   this.test = false;
   this.selectedItem = null;
