@@ -1,33 +1,33 @@
-<div layout="row">
-  <div class="content__container" layout="column" ng-cloak>
-    <md-content class="md-padding">
-      <h2 class="md-display-3">
-        Bobbi-Shopz
-      </h2>
-      <md-button class="button md-raised" target="_self" href="/auth/facebook">
-        Facebook
-      </md-button>
-      <md-button class="button md-raised" ng-click="home.addList()">
-        Add List
-      </md-button>
-      <form class="search" ng-submit="$event.preventDefault()" flex-offset="30" flex="40">
-        <md-autocomplete
-            md-search-text="home.searchText"
-            md-selected-item="home.selectedItem"
-            md-selected-item-change="home.selectedItemChange(item)"
-            md-items="item in home.querySearch(home.searchText)"
-            md-item-text="item.text"
-            md-min-length="1"
-            placeholder="Find food">
-          <md-item-template>
-            <span md-highlight-text="home.searchText" md-highlight-flags="^i">{{item.text}}</span>
-          </md-item-template>
-          <md-not-found>
-            No results for "{{home.searchText}}".
-          </md-not-found>
-        </md-autocomplete>
-      </form>
+<div layout="row" layout-align="center">
+  <md-content class="md-padding" flex=40>
+    <h2 class="md-display-3">
+      Bobbi-Shopz
+    </h2>
+    <md-button class="button md-raised" target="_self" href="/auth/facebook">
+      Facebook
+    </md-button>
+    <md-button class="button md-raised" ng-click="home.addList()">
+      Add List
+    </md-button>
+    <form class="search" ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          md-search-text="home.searchText"
+          md-selected-item="home.selectedItem"
+          md-selected-item-change="home.selectedItemChange(item)"
+          md-items="item in home.querySearch(home.searchText)"
+          md-item-text="item.text"
+          md-min-length="1"
+          placeholder="Find food">
+        <md-item-template>
+          <span md-highlight-text="home.searchText" md-highlight-flags="^i">{{item.text}}</span>
+        </md-item-template>
+        <md-not-found>
+          No results for "{{home.searchText}}".
+        </md-not-found>
+      </md-autocomplete>
+    </form>
+  </md-content>
+  <md-content class="md-padding" flex=40>
 
-    </md-content>
-  </div>
+  </md-content>
 </div>

@@ -28,12 +28,11 @@ module.exports = function(passport) {
           cb(null, user);
         })
         .catch(function(err) {
-          // console.log('err', err)
+          console.log('err', err)
         });
     }));
 
   passport.serializeUser(function(user, cb) {
-    console.log('serialize', user);
     cb(null, user);
   });
 
@@ -43,7 +42,6 @@ module.exports = function(passport) {
     })
     .fetch()
     .then(function(user) {
-      console.log('deserialize', user);
       cb(null, user);
     });
   });

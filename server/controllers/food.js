@@ -49,22 +49,20 @@ export function addToList(req, res, next) {
   List.forge({
     id: 1,
   })
-  .fetch()
+  .fetch({ withRelated: ['foods'] })
   .then(function(list) {
     Food.forge({
       food_id: req.body.id,
     })
     .fetch()
     .then((food) => {
-      list.load(['foods'])
-        .then(function(model) {
-          model.foods().attach([food.id])
-            .then(function(foodJoin) {
-              console.log(foodJoin.model)
-              res.json({ list, model, food, list });
+      list.foods().attach([food.id]).then(function(newListCollection) {
+        newListCollection.fetch({ withRelated: ['foods'] }).then(function(updatedList){
+          res.json({
+            list: updatedList,
           });
-
         });
+      });
     });
   });
 }

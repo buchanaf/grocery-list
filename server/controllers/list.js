@@ -13,3 +13,13 @@ export function addNewList(req, res) {
     res.json({error: false, data: { message: 'List saved', list }});
   });
 }
+
+export function getUserLists(req, res) {
+  List.forge({
+    user_id: req.user.id,
+  })
+  .fetchAll({ withRelated: ['foods'] })
+  .then((lists) => {
+    res.json({error: false, lists });
+  });
+}
