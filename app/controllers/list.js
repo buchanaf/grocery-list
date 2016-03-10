@@ -1,4 +1,4 @@
-export default function homeController(HomeService, AuthService, initialData, $location) {
+export default function listController(HomeService, AuthService, initialData, $location) {
   if (initialData.user.user === null) {
     $location.path('/login')
   }
