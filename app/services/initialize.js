@@ -7,7 +7,9 @@ export default function initializeService(AuthService, HomeService) {
     .then(function(results) {
       return {
         user: results[0],
-        lists: results[1],
+        lists: results[1].data.lists.map((list) => {
+          return { ...list, formatDate: HomeService.formatDate(list.updated_at) };
+        }),
       };
     })
     .catch(function(err){

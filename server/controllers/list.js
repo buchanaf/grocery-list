@@ -6,7 +6,7 @@ import { client } from '../app';
 export function addNewList(req, res) {
   List.forge({
     user_id: req.user.id,
-    title: 'New Grocery List'
+    title: req.body.title,
   })
   .save()
   .then((list) => {
@@ -21,5 +21,15 @@ export function getUserLists(req, res) {
   .fetchAll({ withRelated: ['foods'] })
   .then((lists) => {
     res.json({error: false, lists });
+  });
+}
+
+export function deleteList(req, res) {
+  List.forge({
+    id: req.body.id
+  })
+  .destroy()
+  .then(function(model) {
+    res.json({ list: model });
   });
 }

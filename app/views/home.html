@@ -1,6 +1,4 @@
-<h2>
-  Bobbi-Shopz
-</h2>
+
 <div layout="row" layout-align="center">
   <md-content class="md-padding" flex=40>
     <md-list>
@@ -9,33 +7,34 @@
       </md-subheader>
       <md-list-item class="md-2-line md-clickable" ng-repeat="list in home.lists">
         <div class="md-list-item-text md-ink-ripple" layout="column">
-          <h3>{{ list.title }}</h3>
-          <h4>This list has {{list.foods.length}} items</h4>
-          <p>Updated: {{ list.updated_at }}</p>
+          <h3>
+            {{ list.title }}
+          </h3>
+          <h4>
+            This list has {{ list.foods.length }} items
+          </h4>
+          <p>
+            Updated: {{ list.formatDate }}
+          </p>
         </div>
+        <md-button ng-click="home.deleteList(list.id)">
+          Delete
+        </md-button>
+        <md-button>
+          Select
+        </md-button>
       </md-list-item>
     </md-list>
   </md-content>
   <md-content class="md-padding" flex=40>
-    <md-button class="button md-raised" ng-click="home.addList()">
-      Add List
-    </md-button>
     <form class="search" ng-submit="$event.preventDefault()">
-      <md-autocomplete
-          md-search-text="home.searchText"
-          md-selected-item="home.selectedItem"
-          md-selected-item-change="home.selectedItemChange(item)"
-          md-items="item in home.querySearch(home.searchText)"
-          md-item-text="item.text"
-          md-min-length="1"
-          placeholder="Find food">
-        <md-item-template>
-          <span md-highlight-text="home.searchText" md-highlight-flags="^i">{{item.text}}</span>
-        </md-item-template>
-        <md-not-found>
-          No results for "{{home.searchText}}".
-        </md-not-found>
-      </md-autocomplete>
+      <md-input-container>
+        <label>List Name</label>
+        <input type="text" ng-model="home.listName" required>
+      </md-input-container>
+      <md-button class="md-block md-raised" ng-click="home.addList()">
+        Add List
+      </md-button>
     </form>
   </md-content>
 </div>

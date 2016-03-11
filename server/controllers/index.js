@@ -17,6 +17,7 @@ router.route('/api/food')
 router.route('/api/list')
   .get(ListAPI.getUserLists)
   .post(ListAPI.addNewList)
+  .delete(ListAPI.deleteList)
 
 
 

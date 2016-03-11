@@ -19,6 +19,7 @@ gulp.task('lint', function() {
   return gulp.src(['./app/**/*.js'])
     .pipe(eslint({
       'ecmaFeatures': {
+        'experimentalObjectRestSpread': true,
         'arrowFunctions': true,
         'blockBindings': true,
         'classes': true,
