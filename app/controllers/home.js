@@ -1,4 +1,5 @@
 export default function homeController(HomeService, AuthService, initialData, $location) {
+  if (!initialData) { $location.path('/login'); }
   if (initialData.user.user === null) {
     $location.path('/login');
   }
@@ -26,7 +27,6 @@ export default function homeController(HomeService, AuthService, initialData, $l
   this.addList = () => {
     return HomeService.addList(this.listName)
       .then((results) => {
-        console.log(results);
         this.lists.push(results.data.data.list);
       });
   }
@@ -51,6 +51,10 @@ export default function homeController(HomeService, AuthService, initialData, $l
       .then(this.foodAddSuccess, this.foodAddFail);
   }
 
+  this.setSelectedList = (listIndex) => {
+    HomeService.setSelectedList(listIndex);
+  }
+
   this.foodAddSuccess = (res) => {
     console.log(res);
   }
@@ -64,5 +68,6 @@ export default function homeController(HomeService, AuthService, initialData, $l
     return HomeService.getFoodOptions(query)
       .then(this.changeSuccess, this.changeFail);
   }
+
 }
 

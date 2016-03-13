@@ -1,5 +1,8 @@
 export default function homeService($interval, $log, $http) {
-  var lists = [];
+  const homeData = {
+    selectedList: null,
+    lists: [],
+  };
 
   return {
     getFoodOptions: function(query) {
@@ -30,6 +33,14 @@ export default function homeService($interval, $log, $http) {
 
     getUserLists: function() {
       return $http.get('/api/list')
+        .then(function(data) {
+          homeData.lists = data.data.lists;
+          return data;
+        });
+    },
+
+    setSelectedList: function(listIndex) {
+      homeData.selectedList = homeData.lists[listIndex]
     },
 
     formatDate: function(dateObj) {
@@ -42,6 +53,11 @@ export default function homeService($interval, $log, $http) {
       if (day.length < 2) { day = '0' + day; }
 
       return [year, month, day].join('-');
-    }
+    },
+
+    getState: function() {
+      return homeData;
+    },
+
   }
 }

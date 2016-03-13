@@ -15,6 +15,16 @@ angular
           }
         }
       })
+      .when("/list/:id", {
+        templateUrl: "/app/views/list.html",
+        controllerAs: "list",
+        controller: "ListController",
+        resolve: {
+          initialData: function(InitializeService) {
+            return InitializeService();
+          }
+        },
+      })
       .when("/login", {
         templateUrl: "app/views/login.html",
         controllerAs: "login",

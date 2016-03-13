@@ -15,12 +15,18 @@ export function addNewList(req, res) {
 }
 
 export function getUserLists(req, res) {
+  if (!req.user) {
+    return res.json({ lists: null });
+  }
   List.forge({
     user_id: req.user.id,
   })
   .fetchAll({ withRelated: ['foods'] })
   .then((lists) => {
     res.json({error: false, lists });
+  })
+  .catch(function(err) {
+    console.log(err)
   });
 }
 
