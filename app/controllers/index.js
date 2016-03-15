@@ -6,4 +6,4 @@ import ListController from './list';
 angular.module('app.controllers', ['ngRoute'])
   .controller('HomeController', HomeController)
   .controller('LoginController', LoginController)
-  .controller('ListController', ListController)
+  .controller('ListController', ListController);

@@ -18,6 +18,7 @@ router.route('/api/list')
   .get(ListAPI.getUserLists)
   .post(ListAPI.addNewList)
   .delete(ListAPI.deleteList)
+  .put(ListAPI.updateList)
 
 
 

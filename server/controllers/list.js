@@ -10,7 +10,23 @@ export function addNewList(req, res) {
   })
   .save()
   .then((list) => {
-    res.json({error: false, data: { message: 'List saved', list }});
+    res.json({
+      data: {
+        list,
+        type: 'list',
+      },
+    });
+  })
+  .catch(function(err) {
+    res.status(500);
+    res.json({
+      error: {
+        user_id: req.user.id,
+        title: req.body.title,
+        detail: err,
+        type: 'list',
+      },
+    });
   });
 }
 
@@ -23,10 +39,21 @@ export function getUserLists(req, res) {
   })
   .fetchAll({ withRelated: ['foods'] })
   .then((lists) => {
-    res.json({error: false, lists });
+    res.json({
+      data: [
+        ...lists.map(list => ({ ...list, type: 'list'}))
+      ],
+    });
   })
   .catch(function(err) {
-    console.log(err)
+    res.status(500);
+    res.json({
+      error: {
+        id: req.body.id,
+        detail: err,
+        type: 'list',
+      },
+    });
   });
 }
 
@@ -35,7 +62,52 @@ export function deleteList(req, res) {
     id: req.body.id
   })
   .destroy()
-  .then(function(model) {
-    res.json({ list: model });
+  .then((list) => {
+    res.json({
+      data: {
+        id: req.body.id,
+        success: true,
+        type: 'list',
+      },
+    });
+  })
+  .catch((err) => {
+    res.status(500);
+    res.json({
+      error: {
+        id: req.body.id,
+        detail: err,
+        type: 'list',
+      },
+    });
+  });
+}
+
+export function updateList(req, res) {
+  List.forge({
+    id: req.body.id
+  })
+  .fetch({ withRelated: ['foods'] })
+  .then((list) => {
+    return list.related('foods').detach([req.body.foodId]);
+  })
+  .then((list) => {
+    res.json({
+      data: {
+        id: req.body.foodId,
+        success: true,
+        type: 'food',
+      },
+    });
+  })
+  .catch((err) => {
+    res.status(500);
+    res.json({
+      error: {
+        id: req.body.foodId,
+        detail: err,
+        type: 'food',
+      },
+    });
   });
 }

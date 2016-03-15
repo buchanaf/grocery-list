@@ -10,7 +10,7 @@ module.exports = function(passport) {
       enableProof: true
     },
     function(accessToken, refreshToken, profile, cb) {
-      User.forge({facebook_id: profile.id})
+      User.forge({ facebook_id: profile.id })
         .fetch()
         .then(function (user) {
           if (user) {

@@ -1,5 +1,3 @@
 export default function loginController(HomeService) {
-  this.facebookLogin = () => {
-    HomeService.facebookLogin();
-  }
+  this.facebookLogin = () => HomeService.facebookLogin();
 }

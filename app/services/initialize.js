@@ -1,20 +1,20 @@
 export default function initializeService(AuthService, HomeService) {
-  return function() {
-    return Promise.all([
-      AuthService.getCurrentUser(),
-      HomeService.getUserLists(),
-    ])
-    .then(function(results) {
-      return {
-        user: results[0],
-        lists: results[1].data.lists.map((list) => {
-          return { ...list, formatDate: HomeService.formatDate(list.updated_at) };
-        }),
-      };
-    })
-    .catch(function(err){
-      console.log(err);
-    });
-  }
+  return () => Promise.all([
+    AuthService.getCurrentUser(),
+    HomeService.getUserLists(),
+  ])
+  .then((results) => {
+    console.log(results);
+    return {
+      user: results[0],
+      lists: results[1].map(list => ({
+        ...list,
+        formatDate: HomeService.formatDate(list.attributes.updated_at),
+      })),
+    };
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }
 

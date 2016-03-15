@@ -18,25 +18,9 @@ var babel       = require('babelify');
 gulp.task('lint', function() {
   return gulp.src(['./app/**/*.js'])
     .pipe(eslint({
-      'ecmaFeatures': {
-        'experimentalObjectRestSpread': true,
-        'arrowFunctions': true,
-        'blockBindings': true,
-        'classes': true,
-        'defaultParams': true,
-        'destructuring': true,
-        'forOf': true,
-        'generators': false,
-        'modules': true,
-        'objectLiteralComputedProperties': true,
-        'objectLiteralDuplicateProperties': false,
-        'objectLiteralShorthandMethods': true,
-        'objectLiteralShorthandProperties': true,
-        'restParams': true,
-        'spread': true,
-        'superInFunctions': true,
-        'templateStrings': true
-      }
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+      },
     }))
     .pipe(eslint.format())
 });
@@ -65,17 +49,17 @@ gulp.task('build', function () {
     rebundle();
 });
 
-gulp.task('watch', ['lint', 'build'], function () {
+gulp.task('watch', ['lint', 'build'], function() {
     gulp.watch('./app/**/*.js', ['lint', 'build']);
 });
 
-gulp.task('connect', function () {
+gulp.task('connect', function() {
   connect.server({
     port: 3000,
   });
 });
 
-gulp.task('inject', function () {
+gulp.task('inject', function() {
   var target = gulp.src('index.html');
   var sources = gulp.src(['./dist/*.js', './node_modules/angular-material/angular-material.css', './assets/css/**/*.css',], { read: false });
   return target.pipe(inject(sources))

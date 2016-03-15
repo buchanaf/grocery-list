@@ -1,5 +1,28 @@
+<h1>
+  Test
+</h1>
 <div layout="row" layout-align="center">
   <h2>
-    Test
+    {{ list.selectedList.attributes.name }}
   </h2>
+  <ul>
+    <md-list-item class="md-2-line md-clickable" ng-repeat="food in list.current.relations.foods track by $index">
+      {{ food.name }}
+      <md-button ng-click="list.updateList(food.id)">
+        Delete
+      </md-button>
+    </md-list-item>
+  </ul>
 </div>
+
+<md-content class="md-padding" flex=40>
+  <form class="search" ng-submit="$event.preventDefault()">
+    <md-input-container>
+      <label>List Name</label>
+      <input type="text" ng-model="home.listName" required>
+    </md-input-container>
+    <md-button class="md-block md-raised" ng-click="home.addList()">
+      Add List
+    </md-button>
+  </form>
+</md-content>

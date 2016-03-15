@@ -1,20 +1,14 @@
 export default function authService($interval, $log, $http) {
-  var user = null;
+  let user = null;
 
-  this.getCurrentUser = function(query) {
-    return $http.get('/api/user')
-      .then(function(res){
-        user = res.data;
-        return user;
-      })
-      .catch(function(err){
-        return err;
-      });
-  }
+  this.getCurrentUser = () => $http.get('/api/user')
+    .then((res) => {
+      user = res.data;
+      return user;
+    })
+    .catch(err => err);
 
-  this.returnUser = function() {
-    return user;
-  }
+  this.returnUser = () => user;
 
   return this;
 }
