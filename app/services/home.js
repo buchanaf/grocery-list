@@ -1,16 +1,55 @@
 export default function homeService($interval, $log, $http) {
+  const homeData = {
+    selectedList: null,
+    lists: [],
+  };
+
   return {
-    getFoodOptions: function(query) {
-      return $http.get('/api/food?q=' + query);
+    getFoodOptions: (query) => $http.get(`/api/food?q=${query}`),
+
+    facebookLogin: () => $http.get('/auth/facebook'),
+
+    postFoodItem: (item) => $http.post('/api/food', item),
+
+    addList: (name) => $http.post('/api/list', { title: name }),
+
+    deleteList: (id) => {
+      const config = {
+        method: 'DELETE',
+        url: '/api/list',
+        data: { id },
+        headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      };
+      return $http(config);
     },
-    facebookLogin: function(query) {
-      return $http.get('/auth/facebook');
+
+    getUserLists: () => $http.get('/api/list')
+      .then((results) => {
+        homeData.lists = results.data.data;
+        return results.data.data;
+      }),
+
+    updateList: (foodId) => $http.put('/api/list', {
+      id: homeData.selectedList.id, foodId,
+    }),
+
+    setSelectedList: (listIndex) => {
+      homeData.selectedList = homeData.lists[listIndex];
     },
-    postFoodItem: function(item) {
-      return $http.post('/api/food', item);
+
+    formatDate: (dateObj) => {
+      const d = new Date(dateObj);
+      const year = d.getFullYear();
+      let month = `${d.getMonth() + 1}`;
+      let day = `${d.getDate()}`;
+
+      if (month.length < 2) { month = `0${month}`; }
+      if (day.length < 2) { day = `0${day}`; }
+
+      return [year, month, day].join('-');
     },
-    addList: function(item) {
-      return $http.post('/api/list');
-    },
-  }
+
+    getState: () => homeData,
+
+  };
 }

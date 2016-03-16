@@ -15,7 +15,11 @@ router.route('/api/food')
   .post(FoodAPI.addToList)
 
 router.route('/api/list')
+  .get(ListAPI.getUserLists)
   .post(ListAPI.addNewList)
+  .delete(ListAPI.deleteList)
+  .put(ListAPI.updateList)
+
 
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));

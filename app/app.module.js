@@ -7,6 +7,8 @@ import routes from './app.routes';
 import services from './services';
 import controllers from './controllers';
 
+const app = [services, routes, controllers];//eslint-disable-line
+
 angular
   .module('app', [
     ngRoute,
@@ -15,5 +17,5 @@ angular
     ngMaterial,
     'app.services',
     'app.controllers',
-    'app.routes'
+    'app.routes',
   ]);

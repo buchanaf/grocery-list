@@ -1,9 +1,9 @@
 import angular from 'angular' ;
 import HomeController from './home';
 import LoginController from './login';
-import InitializeController from './initialize';
+import ListController from './list';
 
 angular.module('app.controllers', ['ngRoute'])
   .controller('HomeController', HomeController)
   .controller('LoginController', LoginController)
-  .controller('DataController', InitializeController)
+  .controller('ListController', ListController);

@@ -10,7 +10,7 @@ module.exports = function(passport) {
       enableProof: true
     },
     function(accessToken, refreshToken, profile, cb) {
-      User.forge({facebook_id: profile.id})
+      User.forge({ facebook_id: profile.id })
         .fetch()
         .then(function (user) {
           if (user) {
@@ -28,7 +28,7 @@ module.exports = function(passport) {
           cb(null, user);
         })
         .catch(function(err) {
-          // console.log('err', err)
+          console.log('err', err)
         });
     }));
 
@@ -36,7 +36,13 @@ module.exports = function(passport) {
     cb(null, user);
   });
 
-  passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
+  passport.deserializeUser(function(user, cb) {
+    User.forge({
+      id: user.id,
+    })
+    .fetch()
+    .then(function(user) {
+      cb(null, user);
+    });
   });
 };
