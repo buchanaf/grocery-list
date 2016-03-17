@@ -4,8 +4,12 @@ export default function listController(HomeService, AuthService, $location, $rou
   if (initialData.user.user === null) {
     $location.path('/login');
   }
-
   const homeData = HomeService.getState();
+
+  if (!homeData.selectedlist) {
+    HomeService.setList($routeParams.id);
+  }
+
   this.lists = homeData.lists;
   this.current = homeData.selectedList ||
                  this.lists.filter(list => list.id === parseInt($routeParams.id, 10))[0];
@@ -17,10 +21,6 @@ export default function listController(HomeService, AuthService, $location, $rou
   this.searchText = '';
   this.listName = '';
 
-  this.addList = () => HomeService.addList(this.listName)
-    .then((results) => {
-      this.lists.push(results.data.data.list);
-    });
 
   this.deleteList = (id) => HomeService.deleteList(id)
     .then(() => {
@@ -29,18 +29,24 @@ export default function listController(HomeService, AuthService, $location, $rou
 
   this.deleteFood = (id) => HomeService.deleteFood(id)
     .then(() => {
-      this.selectedList = this.selectedlist.foodsfilter(food => food.id !== id);
+      this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
     });
 
-  this.selectedItemChange = (item) => HomeService.postFoodItem(item);
+  this.selectedItemChange = (item) => HomeService.postFoodItem(item.id, this.current.id);
 
-  this.updateList = (id) => HomeService.updateList(id);
+  this.updateList = (id) => HomeService.updateList(id)
+    .then(() => {
+      this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
+    });
 
   this.querySearch = (query) => {
     if (query === '') { return []; }
 
     return HomeService.getFoodOptions(query)
-      .then(this.changeSuccess, this.changeFail);
+      .then((food) => {
+        console.log(food);
+        return food.data;
+      });
   };
 }
 

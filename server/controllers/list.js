@@ -1,7 +1,4 @@
-import request from 'superagent';
-import config from '../config';
-import { List }  from '../models/lists';
-import { client } from '../app';
+import { List } from '../models/lists';
 
 export function addNewList(req, res) {
   List.forge({
@@ -17,7 +14,7 @@ export function addNewList(req, res) {
       },
     });
   })
-  .catch(function(err) {
+  .catch((err) => {
     res.status(500);
     res.json({
       error: {
@@ -32,37 +29,38 @@ export function addNewList(req, res) {
 
 export function getUserLists(req, res) {
   if (!req.user) {
-    return res.json({ lists: null });
+    res.json({ lists: null });
+  } else {
+    List.forge({
+      user_id: req.user.id,
+    })
+    .fetchAll({ withRelated: ['foods'] })
+    .then((lists) => {
+      res.json({
+        data: [
+          ...lists.map(list => ({ ...list, type: 'list' })),
+        ],
+      });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        error: {
+          id: req.body.id,
+          detail: err,
+          type: 'list',
+        },
+      });
+    });
   }
-  List.forge({
-    user_id: req.user.id,
-  })
-  .fetchAll({ withRelated: ['foods'] })
-  .then((lists) => {
-    res.json({
-      data: [
-        ...lists.map(list => ({ ...list, type: 'list'}))
-      ],
-    });
-  })
-  .catch(function(err) {
-    res.status(500);
-    res.json({
-      error: {
-        id: req.body.id,
-        detail: err,
-        type: 'list',
-      },
-    });
-  });
 }
 
 export function deleteList(req, res) {
   List.forge({
-    id: req.body.id
+    id: req.body.id,
   })
   .destroy()
-  .then((list) => {
+  .then(() => {
     res.json({
       data: {
         id: req.body.id,
@@ -85,13 +83,11 @@ export function deleteList(req, res) {
 
 export function updateList(req, res) {
   List.forge({
-    id: req.body.id
+    id: req.body.id,
   })
   .fetch({ withRelated: ['foods'] })
-  .then((list) => {
-    return list.related('foods').detach([req.body.foodId]);
-  })
-  .then((list) => {
+  .then((list) => list.related('foods').detach([req.body.foodId]))
+  .then(() => {
     res.json({
       data: {
         id: req.body.foodId,

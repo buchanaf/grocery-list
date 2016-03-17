@@ -15,11 +15,11 @@ module.exports = Object.assign({
   appKey: 'ed3b420c52aed783c57255daaee9c828',
   app: {
     title: 'Grocery List',
-    description: 'A grocery list manager for making shopping easy. Grocery list allows for creating custom shopping lists, saving lists, and easily sharing lists between friends.',
+    description: 'A grocery list manager for making shopping easy. Grocery list allows for creating custom shopping lists, saving lists, and easily sharing lists between friends.',//eslint-disable-line
     head: {
       titleTemplate: 'Alex Buchanan: %s',
       meta: [
-        { name: 'A grocery list manager for making shopping easy. Grocery list allows for creating custom shopping lists, saving lists, and easily sharing lists between friends.' },
+        { name: 'A grocery list manager for making shopping easy. Grocery list allows for creating custom shopping lists, saving lists, and easily sharing lists between friends.' },//eslint-disable-line
       ],
     },
   },

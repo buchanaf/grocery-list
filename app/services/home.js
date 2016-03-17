@@ -9,7 +9,7 @@ export default function homeService($interval, $log, $http) {
 
     facebookLogin: () => $http.get('/auth/facebook'),
 
-    postFoodItem: (item) => $http.post('/api/food', item),
+    postFoodItem: (food, list) => $http.post('/api/food', { food, list }),
 
     addList: (name) => $http.post('/api/list', { title: name }),
 
@@ -33,8 +33,8 @@ export default function homeService($interval, $log, $http) {
       id: homeData.selectedList.id, foodId,
     }),
 
-    setSelectedList: (listIndex) => {
-      homeData.selectedList = homeData.lists[listIndex];
+    setList: (id) => {
+      homeData.selectedList = homeData.lists.filter(list => parseInt(id, 10) === list.id)[0];
     },
 
     formatDate: (dateObj) => {

@@ -5,31 +5,31 @@ import * as AuthAPI from './auth';
 import path from 'path';
 import passport from 'passport';
 
-const router = express.Router();
+const router = express.Router();//eslint-disable-line
 
 router.route('/api/user')
   .get(AuthAPI.currentUser);
 
 router.route('/api/food')
   .get(FoodAPI.foodQuery)
-  .post(FoodAPI.addToList)
+  .post(FoodAPI.addToList);
 
 router.route('/api/list')
   .get(ListAPI.getUserLists)
   .post(ListAPI.addNewList)
   .delete(ListAPI.deleteList)
-  .put(ListAPI.updateList)
+  .put(ListAPI.updateList);
+
+router.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/' }), (req, res) => {
+    res.redirect(req.session.returnTo || '/');
+  });
 
 
-
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-
-router.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
-});
-
-
-router.use('*', function(req, res) {
+router.use('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../index.html'));
 });
 

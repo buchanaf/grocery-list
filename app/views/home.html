@@ -19,10 +19,21 @@
         <md-button ng-click="home.deleteList(list.attributes.id)">
           Delete
         </md-button>
-        <md-button ng-href="/list/{{list.id}}" ng-click="home.setSelectedList($index)">
+        <md-button ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
           Select
         </md-button>
       </md-list-item>
     </md-list>
+  </md-content>
+  <md-content class="md-padding" flex=40>
+    <form class="search" ng-submit="$event.preventDefault()">
+      <md-input-container>
+        <label>List Name</label>
+        <input type="text" ng-model="home.listName" required>
+      </md-input-container>
+      <md-button class="md-block md-raised" ng-click="home.addList()">
+        Add List
+      </md-button>
+    </form>
   </md-content>
 </div>
