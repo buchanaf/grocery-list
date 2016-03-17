@@ -1,9 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["angular", "airbnb/base"],
-  "rules": {
-    "angular/log": 0
-  },
+  "extends": ["airbnb/base"],
   "ecmaFeatures": {
     "experimentalObjectRestSpread": true
   }

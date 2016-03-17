@@ -16,7 +16,7 @@ var watchify    = require('watchify');
 var babel       = require('babelify');
 
 gulp.task('lint', function() {
-  return gulp.src(['./app/**/*.js'])
+  return gulp.src(['./app/**/*.js', './server/**/*.js'])
     .pipe(eslint({
       "ecmaFeatures": {
         "experimentalObjectRestSpread": true,
@@ -50,7 +50,7 @@ gulp.task('build', function () {
 });
 
 gulp.task('watch', ['lint', 'build'], function() {
-    gulp.watch('./app/**/*.js', ['lint', 'build']);
+    gulp.watch(['./app/**/*.js', './server/**/*.js'], ['lint', 'build']);
 });
 
 gulp.task('connect', function() {

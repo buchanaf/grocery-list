@@ -7,11 +7,7 @@ export const List = Bookshelf.Model.extend({
 
   hasTimestamps: true,
 
-  foods: function() {
-    return this.belongsToMany(Food);
-  },
+  foods: () => this.belongsToMany(Food),
 
-  user: function() {
-    return this.belongsTo(User);
-  },
+  user: () => this.belongsTo(User),
 });

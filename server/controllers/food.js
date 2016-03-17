@@ -1,17 +1,16 @@
 import request from 'superagent';
 import config from '../config';
 import { Foods, Food } from '../models/foods';
-import { client } from '../app';
-import { List }  from '../models/lists';
+import { List } from '../models/lists';
 
 function getFoodQuery(query) {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     request
       .get('https://apibeta.nutritionix.com/v2/autocomplete')
       .query(query)
-      .set({'X-APP-ID': config.appId})
-      .set({'X-APP-KEY': config.appKey})
-      .end(function(err, results) {
+      .set({ 'X-APP-ID': config.appId })
+      .set({ 'X-APP-KEY': config.appKey })
+      .end((err, results) => {
         if (err) {
           reject(err);
         } else {
@@ -29,39 +28,43 @@ function getFoodQuery(query) {
 export function foodQuery(req, res) {
   const query = req.query;
   // client.getAsync(query.q).then(function(results, err) {
-  Promise.resolve().then(function(results) {
+  Promise.resolve().then((results) => {
     if (results) {
       return JSON.parse(results);
-    } else {
-      return getFoodQuery(query);
     }
-  }).then(function(results) {
+    return getFoodQuery(query);
+  }).then((results) => {
     res.json(results);
-  }).catch(function(err){
-    res.json(err)
+  }).catch((err) => {
+    res.json(err);
   });
 }
 
-export function addToList(req, res, next) {
-  if(!parseInt(req.body.id, 10)) {
-    return next();
-  }
+export function addToList(req, res) {
   List.forge({
-    id: 1,
+    id: req.body.list,
   })
   .fetch({ withRelated: ['foods'] })
-  .then(function(list) {
+  .then((list) => {
     Food.forge({
-      food_id: req.body.id,
+      food_id: req.body.food,
     })
     .fetch()
-    .then((food) => {
-      list.foods().attach([food.id]).then(function(newListCollection) {
-        newListCollection.fetch({ withRelated: ['foods'] }).then(function(updatedList){
-          res.json({
-            list: updatedList,
-          });
-        });
+    .then((food) => list.foods().attach([food.id]))
+    .then((updatedList) => {
+      res.json({
+        data: updatedList,
+      });
+    })
+    .catch((err) => {
+      res.status(500);
+      res.json({
+        error: {
+          list: req.body.list,
+          food: req.body.food,
+          detail: err,
+          type: 'food',
+        },
       });
     });
   });
