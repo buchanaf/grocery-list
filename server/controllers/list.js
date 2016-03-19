@@ -31,13 +31,11 @@ export function getUserLists(req, res) {
   if (!req.user) {
     res.json({ lists: null });
   } else {
-    console.log(req.user.id);
     List.forge({
       user_id: req.user.id,
     })
     .fetchAll({ withRelated: ['foods'] })
     .then((lists) => {
-      console.log(lists);
       res.json({
         data: [
           ...lists.map(list => ({ ...list, type: 'list' })),

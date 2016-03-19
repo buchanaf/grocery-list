@@ -5,6 +5,7 @@ var connect     = require('gulp-connect');
 var eslint      = require('gulp-eslint');
 var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
+var copy        = require('gulp-copy');
 var minifyCSS   = require('gulp-minify-css');
 var clean       = require('gulp-clean');
 var inject      = require('gulp-inject');
@@ -57,6 +58,11 @@ gulp.task('connect', function() {
   connect.server({
     port: 3000,
   });
+});
+
+gulp.task('copy', function() {
+  return gulp.src(['./assets/img/**/*'])
+    .pipe(gulp.dest('./dist/img'));
 });
 
 gulp.task('inject', function() {

@@ -51,10 +51,13 @@ export function addToList(req, res) {
     })
     .fetch()
     .then((food) => list.foods().attach([food.id]))
-    .then((updatedList) => {
-      res.json({
-        data: updatedList,
-      });
+    .then((ListCollection) => {
+      ListCollection.fetch()
+        .then((foods) => {
+          res.json({
+            data: foods,
+          });
+        });
     })
     .catch((err) => {
       res.status(500);

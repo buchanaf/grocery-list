@@ -1,5 +1,4 @@
 export default function homeController(HomeService, AuthService, initialData) {
-  console.log(initialData);
   this.selectedItem = null;
   this.cache = true;
   this.lists = initialData.lists;

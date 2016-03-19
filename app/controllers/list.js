@@ -1,9 +1,4 @@
 export default function listController(HomeService, AuthService, $location, $routeParams, initialData) {//eslint-disable-line
-  if (!initialData) { $location.path('/login'); }
-
-  if (initialData.user.user === null) {
-    $location.path('/login');
-  }
   const homeData = HomeService.getState();
 
   if (!homeData.selectedlist) {
@@ -32,7 +27,10 @@ export default function listController(HomeService, AuthService, $location, $rou
       this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
     });
 
-  this.selectedItemChange = (item) => HomeService.postFoodItem(item.id, this.current.id);
+  this.selectedItemChange = (item) => HomeService.postFoodItem(item.id, this.current.id)
+    .then((foods) => {
+      this.current.relations.foods = foods;
+    });
 
   this.updateList = (id) => HomeService.updateList(id)
     .then(() => {
@@ -43,10 +41,7 @@ export default function listController(HomeService, AuthService, $location, $rou
     if (query === '') { return []; }
 
     return HomeService.getFoodOptions(query)
-      .then((food) => {
-        console.log(food);
-        return food.data;
-      });
+      .then((food) => food.data);
   };
 }
 

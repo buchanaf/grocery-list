@@ -13,5 +13,5 @@ export const List = Bookshelf.Model.extend({
 
   user: function user() {
     return this.belongsTo(User);
-  }
+  },
 });

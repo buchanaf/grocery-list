@@ -1,0 +1,4 @@
+body, html {
+  background: red;
+  background-image: url('../img/home-background.jpg');
+}

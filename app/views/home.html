@@ -1,11 +1,11 @@
-<div layout="row" layout-align="center">
-  <md-content class="md-padding" flex=40>
-    <md-list>
-      <md-subheader class="md-no-sticky">
+<div>
+  <div>
+    <div>
+      <h2>
         Single Action Checkboxes
-      </md-subheader>
-      <md-list-item class="md-2-line md-clickable" ng-repeat="list in home.lists track by $index">
-        <div class="md-list-item-text md-ink-ripple" layout="column">
+      </h2>
+      <ul>
+        <li class="md-2-line md-clickable" ng-repeat="list in home.lists track by $index">
           <h3>
             {{ list.attributes.title }}
           </h3>
@@ -15,25 +15,25 @@
           <p>
             Updated: {{ list.formatDate }}
           </p>
-        </div>
-        <md-button ng-click="home.deleteList(list.attributes.id)">
-          Delete
-        </md-button>
-        <md-button ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
-          Select
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </md-content>
-  <md-content class="md-padding" flex=40>
+          <button ng-click="home.deleteList(list.attributes.id)">
+            Delete
+          </button>
+          <button ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
+            Select
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
     <form class="search" ng-submit="$event.preventDefault()">
-      <md-input-container>
+      <fieldset>
         <label>List Name</label>
         <input type="text" ng-model="home.listName" required>
-      </md-input-container>
-      <md-button class="md-block md-raised" ng-click="home.addList()">
+      </fieldset>
+      <button ng-click="home.addList()">
         Add List
-      </md-button>
+      </button>
     </form>
-  </md-content>
+  </div>
 </div>
