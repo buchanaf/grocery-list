@@ -1,4 +1,11 @@
-body, html {
-  background: red;
-  background-image: url('../img/home-background.jpg');
-}
+/* COMPONENT CSS FILES */
+@import 'helpers';
+@import 'fonts';
+@import 'normalize';
+@import 'media-queries';
+@import 'colors';
+@import 'mixins';
+@import 'base';
+@import 'views';
+@import 'shared';
+

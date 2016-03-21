@@ -1,7 +1,7 @@
 export default function homeController(HomeService, AuthService, initialData) {
   this.selectedItem = null;
-  this.cache = true;
   this.lists = initialData.lists;
+  console.log(initialData.lists);
 
   this.searchText = '';
   this.listName = '';

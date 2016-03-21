@@ -1,39 +1,43 @@
-<div>
-  <div>
-    <div>
-      <h2>
-        Single Action Checkboxes
-      </h2>
-      <ul>
-        <li class="md-2-line md-clickable" ng-repeat="list in home.lists track by $index">
-          <h3>
+<main class="dashboard">
+  <section>
+    <h2>
+      Single Action Checkboxes
+    </h2>
+    <aside class="sidebar">
+      <h3 class="subtitle">
+        Lists
+      </h3>
+      <ul class="sidebar__lists">
+        <li class="sidebar__item" ng-repeat="list in home.lists track by $index">
+          <h3 class="sidebar__title">
             {{ list.attributes.title }}
           </h3>
-          <h4>
-            This list has {{ list.foods.length }} items
-          </h4>
-          <p>
+          <p class="sidebar__paragraph">
+            This list has
+            <span>
+              {{ list.relations.foods.length }}
+            <span> items
+          </p>
+          <p class="sidebar__paragraph">
             Updated: {{ list.formatDate }}
           </p>
-          <button ng-click="home.deleteList(list.attributes.id)">
+          <button class="button button--primary" ng-click="home.deleteList(list.attributes.id)">
             Delete
           </button>
-          <button ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
+          <a class="button button--secondary" ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
             Select
-          </button>
+          </a>
         </li>
       </ul>
-    </div>
-  </div>
-  <div>
-    <form class="search" ng-submit="$event.preventDefault()">
-      <fieldset>
-        <label>List Name</label>
-        <input type="text" ng-model="home.listName" required>
-      </fieldset>
-      <button ng-click="home.addList()">
+    </aside>
+  </section>
+  <section class="new">
+    <form class="new__form" ng-submit="$event.preventDefault()">
+      <label>List Name</label>
+      <input type="text" ng-model="home.listName" required>
+      <button class="button button--primary" ng-click="home.addList()">
         Add List
       </button>
     </form>
-  </div>
-</div>
+  </section>
+</main>

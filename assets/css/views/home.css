@@ -1,0 +1,82 @@
+.container {
+  min-height: 100%;
+}
+
+.dashboard:before {
+  background: url('/dist/img/home-background.jpg') no-repeat fixed center center;
+  background-size: cover;
+  bottom: 0;
+  content: "";
+  opacity: 0.7;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.subtitle {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin: 1rem 0;
+}
+
+.sidebar {
+  background: rgb(69, 74, 76);
+  color: white;
+  font-size: 1rem;
+  font-family: Avenir, 'Segoe UI', Arial, sans-serif;
+  left: 0;
+  min-height: calc(100vh - 2rem);
+  opacity: 1;
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  width: 300px;
+}
+
+.sidebar__lists  {
+  max-height: 30rem;
+  overflow: scroll;
+}
+
+.sidebar__item {
+  padding: 0 0 1rem 0;
+  margin: 1.5rem 0;
+  border-bottom: 1px solid #fff;
+}
+
+.sidebar__title {
+  font-size: 1.25rem;
+}
+
+.sidebar__paragraph {
+  margin: 0.5rem 0;
+}
+
+.button {
+  border: 0;
+  color: #fff;
+  margin: 0.5rem 0.5rem 0 0;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.button--primary {
+  background: #8f7ee6;
+}
+
+.button--secondary {
+  background: #00aaff;
+}
+
+.new {
+  background: rgba(255, 255, 255, 0.6);
+  left: 50%;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+}

@@ -8,24 +8,24 @@
   <div>
     <form ng-submit="$event.preventDefault()">
       <input
-          md-search-text="list.searchText"
-          md-selected-item="list.selectedItem"
-          md-selected-item-change="list.selectedItemChange(item)"
-          md-items="item in list.querySearch(list.searchText)"
-          md-item-text="item.text"
-          md-min-length="1"
-          placeholder="Find food" />
+        ng-model="list.searchText"
+        ng-minlength="1"
+        ng-change="list.querySearch(list.searchText)"
+        placeholder="Find food"
+      />
         <ul>
-          <span md-highlight-text="list.searchText" md-highlight-flags="^i">
-            {{item.text}}
-          </span>
+          <li ng-repeat="item in list.searchResults track by $index" ng-click="list.addFoodItem(item.id)">
+            <span md-highlight-text="list.searchText" md-highlight-flags="^i">
+              {{item.text}}
+            </span>
+          </li>
         </ul>
     </form>
   </div>
   <ul>
     <li class="md-2-line md-clickable" ng-repeat="food in list.current.relations.foods track by $index">
       {{ food.name }}
-      <button ng-click="list.updateList(food.id)">
+      <button ng-click="list.deleteFood(food.id)">
         Delete
       </button>
     </li>

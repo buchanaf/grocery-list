@@ -16,32 +16,24 @@ export default function listController(HomeService, AuthService, $location, $rou
   this.searchText = '';
   this.listName = '';
 
-
-  this.deleteList = (id) => HomeService.deleteList(id)
-    .then(() => {
-      this.lists = this.lists.filter(list => list.id !== id);
-    });
-
-  this.deleteFood = (id) => HomeService.deleteFood(id)
+  this.deleteFood = (id) => HomeService.updateList(id)
     .then(() => {
       this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
     });
 
-  this.selectedItemChange = (item) => HomeService.postFoodItem(item.id, this.current.id)
+  this.addFoodItem = (id) => HomeService.postFoodItem(id, this.current.id)
     .then((foods) => {
       this.current.relations.foods = foods;
-    });
-
-  this.updateList = (id) => HomeService.updateList(id)
-    .then(() => {
-      this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
+      this.searchResults = [];
+      this.searchText = '';
     });
 
   this.querySearch = (query) => {
     if (query === '') { return []; }
 
     return HomeService.getFoodOptions(query)
-      .then((food) => food.data);
+      .then((foods) => {
+        this.searchResults = foods.data;
+      });
   };
 }
-
