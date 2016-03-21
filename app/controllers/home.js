@@ -1,13 +1,7 @@
 export default function homeController(HomeService, AuthService, initialData) {
-  // if (!initialData) { $location.path('/login'); }
-
-  // if (initialData.user.user === null) {
-  //   $location.path('/login');
-  // }
-
   this.selectedItem = null;
-  this.cache = true;
   this.lists = initialData.lists;
+  console.log(initialData.lists);
 
   this.searchText = '';
   this.listName = '';

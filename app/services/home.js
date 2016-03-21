@@ -9,7 +9,11 @@ export default function homeService($interval, $log, $http) {
 
     facebookLogin: () => $http.get('/auth/facebook'),
 
-    postFoodItem: (food, list) => $http.post('/api/food', { food, list }),
+    postFoodItem: (food, list) => $http.post('/api/food', { food, list })
+    .then((results) => {
+      homeData.selectedList.foods = results.data.data;
+      return results.data.data;
+    }),
 
     addList: (name) => $http.post('/api/list', { title: name }),
 

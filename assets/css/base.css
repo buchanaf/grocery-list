@@ -1,0 +1,37 @@
+
+* {
+  box-sizing: content-box;
+}
+
+body, html {
+  min-height: 100%;
+  padding: 0; margin:0
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.app-container {
+  bottom: 0;
+  left: 0;
+  min-height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  transition: 0.5s ease-in-out;
+}
+
+.app-container--left {
+  transform: translate(-260px);
+}
+
+.scroll--prevent {
+  height: 100%;
+  overflow: hidden;
+}

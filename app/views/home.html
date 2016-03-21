@@ -1,39 +1,43 @@
-<div layout="row" layout-align="center">
-  <md-content class="md-padding" flex=40>
-    <md-list>
-      <md-subheader class="md-no-sticky">
-        Single Action Checkboxes
-      </md-subheader>
-      <md-list-item class="md-2-line md-clickable" ng-repeat="list in home.lists track by $index">
-        <div class="md-list-item-text md-ink-ripple" layout="column">
-          <h3>
+<main class="dashboard">
+  <section>
+    <h2>
+      Single Action Checkboxes
+    </h2>
+    <aside class="sidebar">
+      <h3 class="subtitle">
+        Lists
+      </h3>
+      <ul class="sidebar__lists">
+        <li class="sidebar__item" ng-repeat="list in home.lists track by $index">
+          <h3 class="sidebar__title">
             {{ list.attributes.title }}
           </h3>
-          <h4>
-            This list has {{ list.foods.length }} items
-          </h4>
-          <p>
+          <p class="sidebar__paragraph">
+            This list has
+            <span>
+              {{ list.relations.foods.length }}
+            <span> items
+          </p>
+          <p class="sidebar__paragraph">
             Updated: {{ list.formatDate }}
           </p>
-        </div>
-        <md-button ng-click="home.deleteList(list.attributes.id)">
-          Delete
-        </md-button>
-        <md-button ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
-          Select
-        </md-button>
-      </md-list-item>
-    </md-list>
-  </md-content>
-  <md-content class="md-padding" flex=40>
-    <form class="search" ng-submit="$event.preventDefault()">
-      <md-input-container>
-        <label>List Name</label>
-        <input type="text" ng-model="home.listName" required>
-      </md-input-container>
-      <md-button class="md-block md-raised" ng-click="home.addList()">
+          <button class="button button--primary" ng-click="home.deleteList(list.attributes.id)">
+            Delete
+          </button>
+          <a class="button button--secondary" ng-href="/list/{{list.id}}" ng-click="home.setList(list.id)">
+            Select
+          </a>
+        </li>
+      </ul>
+    </aside>
+  </section>
+  <section class="new">
+    <form class="new__form" ng-submit="$event.preventDefault()">
+      <label>List Name</label>
+      <input type="text" ng-model="home.listName" required>
+      <button class="button button--primary" ng-click="home.addList()">
         Add List
-      </md-button>
+      </button>
     </form>
-  </md-content>
-</div>
+  </section>
+</main>
