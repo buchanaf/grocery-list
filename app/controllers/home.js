@@ -16,6 +16,7 @@ export default function homeController(HomeService, AuthService, initialData) {
 
   this.addList = () => HomeService.addList(this.listName)
     .then((results) => {
+      console.log(results);
       this.lists.push(results.data.data.list);
     });
 

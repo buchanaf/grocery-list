@@ -9,7 +9,13 @@ export function addNewList(req, res) {
   .then((list) => {
     res.json({
       data: {
-        list,
+        list: {
+          ...list,
+          relations: {
+            foods: [],
+          },
+          title: req.body.title,
+        },
         type: 'list',
       },
     });
