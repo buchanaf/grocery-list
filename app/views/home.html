@@ -33,8 +33,7 @@
   </section>
   <section class="new">
     <form class="new__form" ng-submit="$event.preventDefault()">
-      <label>List Name</label>
-      <input type="text" ng-model="home.listName" required>
+      <input class="input" placeholder="List name" type="text" ng-model="home.listName" required>
       <button class="button button--primary" ng-click="home.addList()">
         Add List
       </button>
