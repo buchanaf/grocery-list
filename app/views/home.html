@@ -4,10 +4,10 @@
       Single Action Checkboxes
     </h2>
     <aside class="sidebar">
-      <h3 class="subtitle">
+      <h3 class="sidebar__subtitle">
         Lists
       </h3>
-      <ul class="sidebar__lists">
+      <ul class="sidebar__list">
         <li class="sidebar__item" ng-repeat="list in home.lists track by $index">
           <h3 class="sidebar__title">
             {{ list.attributes.title }}
@@ -31,10 +31,10 @@
       </ul>
     </aside>
   </section>
-  <section class="new">
-    <form class="new__form" ng-submit="$event.preventDefault()">
+  <section class="list__add">
+    <form class="list__form" ng-submit="$event.preventDefault()">
       <input class="input" placeholder="List name" type="text" ng-model="home.listName" required>
-      <button class="button button--primary" ng-click="home.addList()">
+      <button class="button button--primary right" ng-click="home.addList()">
         Add List
       </button>
     </form>

@@ -1,12 +1,12 @@
-export default function listController(HomeService, AuthService, $location, $routeParams, initialData) {//eslint-disable-line
-  const homeData = HomeService.getState();
+export default function listController(ListService, AuthService, $location, $routeParams, initialData) {//eslint-disable-line
+  const listData = ListService.getState();
 
-  if (!homeData.selectedlist) {
-    HomeService.setList($routeParams.id);
+  if (!listData.selectedlist) {
+    ListService.setList($routeParams.id);
   }
 
-  this.lists = homeData.lists;
-  this.current = homeData.selectedList ||
+  this.lists = listData.lists;
+  this.current = listData.selectedList ||
                  this.lists.filter(list => list.id === parseInt($routeParams.id, 10))[0];
 
   this.searchResults = [];
@@ -16,12 +16,12 @@ export default function listController(HomeService, AuthService, $location, $rou
   this.searchText = '';
   this.listName = '';
 
-  this.deleteFood = (id) => HomeService.updateList(id)
+  this.deleteFood = (id) => ListService.updateList(id)
     .then(() => {
       this.current.relations.foods = this.current.relations.foods.filter(food => food.id !== id);
     });
 
-  this.addFoodItem = (id) => HomeService.postFoodItem(id, this.current.id)
+  this.addFoodItem = (id) => ListService.postFoodItem(id, this.current.id)
     .then((foods) => {
       this.current.relations.foods = foods;
       this.searchResults = [];
@@ -31,7 +31,7 @@ export default function listController(HomeService, AuthService, $location, $rou
   this.querySearch = (query) => {
     if (query === '') { return []; }
 
-    return HomeService.getFoodOptions(query)
+    return ListService.getFoodOptions(query)
       .then((foods) => {
         this.searchResults = foods.data;
       });

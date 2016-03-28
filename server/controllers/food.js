@@ -50,7 +50,14 @@ export function addToList(req, res) {
       food_id: req.body.food,
     })
     .fetch()
-    .then((food) => list.foods().attach([food.id]))
+    .then((food) => list.foods().attach([{
+      food_id: food.id,
+      list_id: list.id,
+      quantity: 2,
+      measurement: 'cups',
+      category: 'deli',
+      notes: 'did this work?',
+    }]))
     .then((ListCollection) => {
       ListCollection.fetch()
         .then((foods) => {

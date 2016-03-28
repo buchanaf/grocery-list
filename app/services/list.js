@@ -1,20 +1,10 @@
-export default function homeService($interval, $log, $http) {
-  const homeData = {
+export default function listService($interval, $log, $http) {
+  const listData = {
     selectedList: null,
     lists: [],
   };
 
   return {
-    getFoodOptions: (query) => $http.get(`/api/food?q=${query}`),
-
-    facebookLogin: () => $http.get('/auth/facebook'),
-
-    postFoodItem: (food, list) => $http.post('/api/food', { food, list })
-    .then((results) => {
-      homeData.selectedList.foods = results.data.data;
-      return results.data.data;
-    }),
-
     addList: (name) => $http.post('/api/list', { title: name }),
 
     deleteList: (id) => {
@@ -27,19 +17,27 @@ export default function homeService($interval, $log, $http) {
       return $http(config);
     },
 
+    setList: (id) => {
+      listData.selectedList = listData.lists.filter(list => parseInt(id, 10) === list.id)[0];
+    },
+
+    getFoodOptions: (query) => $http.get(`/api/food?q=${query}`),
+
+    postFoodItem: (food, list) => $http.post('/api/food', { food, list })
+      .then((results) => {
+        listData.selectedList.foods = results.data.data;
+        return results.data.data;
+      }),
+
     getUserLists: () => $http.get('/api/list')
       .then((results) => {
-        homeData.lists = results.data.data;
+        listData.lists = results.data.data;
         return results.data.data;
       }),
 
     updateList: (foodId) => $http.put('/api/list', {
-      id: homeData.selectedList.id, foodId,
+      id: listData.selectedList.id, foodId,
     }),
-
-    setList: (id) => {
-      homeData.selectedList = homeData.lists.filter(list => parseInt(id, 10) === list.id)[0];
-    },
 
     formatDate: (dateObj) => {
       const d = new Date(dateObj);
@@ -53,7 +51,7 @@ export default function homeService($interval, $log, $http) {
       return [year, month, day].join('-');
     },
 
-    getState: () => homeData,
+    getState: () => listData,
 
   };
 }
