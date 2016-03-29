@@ -2,24 +2,19 @@
   <div class="list__container">
     <section class="list__column">
       <h3 class="subtitle list__subtitle list__subtitle--primary">
-        Open items
+        Grocery List
       </h3>
       <ul class="list">
-        <li class="list__item clearfix" ng-repeat="food in list.current.relations.foods track by $index">
+        <li class="list__item clearfix" ng-repeat="food in list.foods track by $index">
           <span class="left">
             {{food.name}}
           </span>
-          <svg class="icon--delete"version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-            <path fill="#444" d="M8 0c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zM8 14.5c-3.59 0-6.5-2.91-6.5-6.5s2.91-6.5 6.5-6.5 6.5 2.91 6.5 6.5-2.91 6.5-6.5 6.5z"></path>
-            <path fill="#444" d="M10.5 4l-2.5 2.5-2.5-2.5-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 2.5-2.5 2.5 2.5 1.5-1.5-2.5-2.5 2.5-2.5z"></path>
-          </svg>
+          <div class="checkbox right">
+            <input type="checkbox" id="checkbox-{{$index}}" value="none" name="checkbox"/>
+            <label class="checkbox__label" for="checkbox-{{$index}}"></label>
+          </div>
         </li>
       </ul>
-    </section>
-    <section class="list__column">
-      <h3 class="subtitle list__subtitle list__subtitle--secondary">
-        Closed Items
-      </h3>
     </section>
     <section class="list__column">
       <h3 class="subtitle list__subtitle list__subtitle--ternary">
@@ -39,7 +34,7 @@
           </li>
         </ul>
     </section>
-    <section class="list__column">
+    <!-- <section class="list__column">
       <h3 class="subtitle list__subtitle list__subtitle--ternary">
         Shared With
       </h3>
@@ -51,5 +46,5 @@
         </li>
       </ul>
     </section>
-  </div>
+  </div> -->
 </main>

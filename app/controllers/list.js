@@ -1,4 +1,4 @@
-export default function listController(ListService, AuthService, $location, $routeParams, initialData) {//eslint-disable-line
+export default function listController(ListService, AuthService, $location, $routeParams, initialData, $scope) {//eslint-disable-line
   const listData = ListService.getState();
 
   if (!listData.selectedlist) {
@@ -9,9 +9,17 @@ export default function listController(ListService, AuthService, $location, $rou
   this.current = listData.selectedList ||
                  this.lists.filter(list => list.id === parseInt($routeParams.id, 10))[0];
 
+  this.foods = this.current.relations.foods;
+
   this.searchResults = [];
   this.cache = true;
   this.lists = initialData.lists;
+
+  $scope.$watch(() => this.foods,
+    (newValue, oldValue) => {
+      console.log(newValue, oldValue);
+    }
+  );
 
   this.searchText = '';
   this.listName = '';
@@ -24,6 +32,7 @@ export default function listController(ListService, AuthService, $location, $rou
   this.addFoodItem = (id) => ListService.postFoodItem(id, this.current.id)
     .then((foods) => {
       this.current.relations.foods = foods;
+      this.foods = foods;
       this.searchResults = [];
       this.searchText = '';
     });

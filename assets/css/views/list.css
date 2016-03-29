@@ -3,21 +3,20 @@
 }
 
 .list__container {
-  display: flex;
-  flex-align: stretch;
+  padding: 2rem;
   height: 100%;
 }
 
 .list__column {
-  border-right: 1px solid grey;
+  border: 1px solid grey;
+  height: calc(100% - 4rem);
   display: inline-block;
-  flex-grow: 1;
-  height: 100%;
   vertical-align: top;
+  width: 300px;
 }
 
 .list__item {
-  line-height: 3rem;
+  line-height: 2rem;
   padding: 0.5rem 1rem;
   position: relative;
   vertical-align: middle;
@@ -46,7 +45,7 @@
 
 .list {
   background-color: rgba(0, 0, 0, 0);
-  height: 100%;
+  height: calc(100% - 4rem);
   overflow-y: auto;
 }
 
@@ -89,4 +88,49 @@
 
 .list__subtitle--ternary {
   background: #98aab3;
+}
+
+.checkbox {
+  width: 20px;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+.checkbox__label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+}
+
+.checkbox__label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+
+.checkbox__label:hover::after {
+  opacity: 0.3;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
+}
+
+input[type=checkbox]:checked + label:after {
+  opacity: 1;
 }

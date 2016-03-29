@@ -8,7 +8,12 @@ export const List = Bookshelf.Model.extend({
   hasTimestamps: true,
 
   foods: function foods() {
-    return this.belongsToMany(Food);
+    return this.belongsToMany(Food).withPivot([
+      'complete',
+      'quantity',
+      'measurement',
+      'category',
+    ]);
   },
 
   user: function user() {
