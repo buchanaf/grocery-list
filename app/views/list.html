@@ -10,7 +10,7 @@
             {{food.name}}
           </span>
           <div class="checkbox right">
-            <input type="checkbox" id="checkbox-{{$index}}" value="none" name="checkbox"/>
+            <input type="checkbox" ng-change="list.onCompletionChange($index)" id="checkbox-{{$index}}" ng-model="food._pivot_complete" value="none" name="checkbox"/>
             <label class="checkbox__label" for="checkbox-{{$index}}"></label>
           </div>
         </li>

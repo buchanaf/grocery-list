@@ -15,14 +15,13 @@ export default function listController(ListService, AuthService, $location, $rou
   this.cache = true;
   this.lists = initialData.lists;
 
-  $scope.$watch(() => this.foods,
-    (newValue, oldValue) => {
-      console.log(newValue, oldValue);
-    }
-  );
-
   this.searchText = '';
   this.listName = '';
+
+
+  this.onCompletionChange = (index) => {
+    ListService.updateFoodRelations(this.foods[index]);
+  };
 
   this.deleteFood = (id) => ListService.updateList(id)
     .then(() => {

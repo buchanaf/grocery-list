@@ -113,3 +113,43 @@ export function updateList(req, res) {
     });
   });
 }
+
+export function updateFoodRelations(req, res) {
+  console.log(req.body);
+  List.forge({
+    id: req.body._pivot_list_id,
+  })
+  .fetch({ withRelated: ['foods'] })
+  .then((list) => list.related('foods').updatePivot({
+    complete: req.body._pivot_complete,
+    quantity: req.body._pivot_quantity,
+    measurement: req.body._pivot_measurement,
+    category: req.body._pivot_category,
+  }, {
+    query: {
+      where: {
+        food_id: req.body.id,
+        list_id: req.body._pivot_list_id,
+      },
+    },
+  }))
+  .then(() => {
+    res.json({
+      data: {
+        id: req.body.foodId,
+        success: true,
+        type: 'food',
+      },
+    });
+  })
+  .catch((err) => {
+    res.status(500);
+    res.json({
+      error: {
+        id: req.body.foodId,
+        detail: err,
+        type: 'food',
+      },
+    });
+  });
+}

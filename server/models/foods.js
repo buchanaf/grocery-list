@@ -3,12 +3,7 @@ import { List } from './lists';
 
 export const Food = Bookshelf.Model.extend({
   tableName: 'foods',
-  lists: () => this.belongsToMany(List).withPivot([
-    'complete',
-    'quantity',
-    'measurement',
-    'category',
-  ]),
+  lists: () => this.belongsToMany(List),
 });
 
 export const Foods = Bookshelf.Collection.extend({

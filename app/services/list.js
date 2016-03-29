@@ -51,6 +51,11 @@ export default function listService($interval, $log, $http) {
       return [year, month, day].join('-');
     },
 
+    updateFoodRelations: (updateObj) => $http.put('/api/list_relations', { ...updateObj })
+      .then((results) => {
+        console.log(results);
+      }),
+
     getState: () => listData,
 
   };
