@@ -27,6 +27,10 @@
   vertical-align:middle;
 }
 
+.search {
+  display: inline-block;
+}
+
 .list__search {
   border-bottom: 1px solid grey;
   cursor: pointer;

@@ -1,3 +1,8 @@
+<header class="header">
+  <nav>
+
+  </nav>
+</header>
 <main class="main">
   <div class="list__container">
     <section class="list__column">
@@ -16,35 +21,22 @@
         </li>
       </ul>
     </section>
-    <section class="list__column">
-      <h3 class="subtitle list__subtitle list__subtitle--ternary">
-        Add Items
-      </h3>
+    <section class="search">
       <input
-        class="input list__input"
+        class="input"
         ng-model="list.searchText"
         ng-minlength="1"
         ng-change="list.querySearch(list.searchText)"
         placeholder="Find food" />
-        <ul class="list">
-          <li class="list__search" ng-repeat="item in list.searchResults track by $index" ng-click="list.addFoodItem(item.id)">
-            <span md-highlight-text="list.searchText" md-highlight-flags="^i">
-              {{item.text}}
-            </span>
-          </li>
-        </ul>
-    </section>
-    <!-- <section class="list__column">
-      <h3 class="subtitle list__subtitle list__subtitle--ternary">
-        Shared With
-      </h3>
-      <ul class="list">
-        <li>
-          <button class="button button--primary">
-            Add friend
-          </button>
+      <ul class="search__list">
+        <li
+          class="list__search"
+          ng-repeat="item in list.searchResults track by $index"
+          ng-click="list.addFoodItem(item.id)">
+          <span md-highlight-text="list.searchText" md-highlight-flags="^i">
+            {{item.text}}
+          </span>
         </li>
       </ul>
     </section>
-  </div> -->
 </main>
