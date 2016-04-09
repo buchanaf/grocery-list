@@ -1,7 +1,46 @@
 <header class="header">
-  <nav>
-
-  </nav>
+  <h2 class="header__title">
+    <svg class="header__logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+      <path fill="#444" d="M3.5 0c-1.657 0-3 1.567-3 3.5 0 1.655 0.985 3.042 2.308 3.406l-0.497 8.096c-0.034 0.549 0.389 0.998 0.939 0.998h0.5c0.55 0 0.972-0.449 0.939-0.998l-0.497-8.096c1.323-0.365 2.308-1.751 2.308-3.406 0-1.933-1.343-3.5-3-3.5zM13.583 0l-0.833 5h-0.625l-0.417-5h-0.417l-0.417 5h-0.625l-0.833-5h-0.417v6.5c0 0.276 0.224 0.5 0.5 0.5h1.302l-0.491 8.002c-0.034 0.549 0.389 0.998 0.939 0.998h0.5c0.55 0 0.972-0.449 0.939-0.998l-0.491-8.002h1.302c0.276 0 0.5-0.224 0.5-0.5v-6.5h-0.417z"></path>
+    </svg>
+    Bobbi-Shopz
+  </h2>
+  <aside class="header__aside">
+    <ul class="header__list">
+      <li class="header__list-item header__list-item--search" ng-class="{'header__list-item--show': list.searchShow}">
+        <svg ng-click="list.toggleSearch()" class="icon icon--search" ng-class="{'icon--show': list.searchShow}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+          <path d="M19.427 20.427c-1.39 0.99-3.090 1.573-4.927 1.573-4.694 0-8.5-3.806-8.5-8.5s3.806-8.5 8.5-8.5c4.694 0 8.5 3.806 8.5 8.5 0 1.837-0.583 3.537-1.573 4.927l5.585 5.585c0.55 0.55 0.546 1.431-0 1.976l-0.023 0.023c-0.544 0.544-1.431 0.546-1.976 0l-5.585-5.585zM14.5 20c3.59 0 6.5-2.91 6.5-6.5s-2.91-6.5-6.5-6.5c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5v0z">
+          </path>
+        </svg>
+        <section class="search" ng-show="list.searchShow">
+          <form class="search__form">
+            <input
+              class="input input--search"
+              ng-model="list.searchText"
+              ng-minlength="1"
+              ng-change="list.querySearch(list.searchText)"
+              placeholder="Find food" />
+          </form>
+          <ul class="search__list">
+            <li
+              class="search__item"
+              ng-repeat="item in list.searchResults track by $index"
+              ng-click="list.addFoodItem(item.id)">
+              <span md-highlight-text="list.searchText" md-highlight-flags="^i">
+                {{item.text}}
+              </span>
+            </li>
+          </ul>
+        </section>
+      </li>
+      <li class="header__list-item">
+        Completed: {{list.foods.length}}
+      </li>
+      <li class="header__list">
+        Total: {{(list.foods | filter:list.filterCompleted).length}}
+      </li>
+    </ul>
+  </aside>
 </header>
 <main class="main">
   <div class="list__container">
@@ -9,7 +48,7 @@
       <h3 class="subtitle list__subtitle list__subtitle--primary">
         Grocery List
       </h3>
-      <ul class="list">
+      <ul class="grocery__list">
         <li class="list__item clearfix" ng-repeat="food in list.foods track by $index">
           <span class="left">
             {{food.name}}
@@ -21,22 +60,5 @@
         </li>
       </ul>
     </section>
-    <section class="search">
-      <input
-        class="input"
-        ng-model="list.searchText"
-        ng-minlength="1"
-        ng-change="list.querySearch(list.searchText)"
-        placeholder="Find food" />
-      <ul class="search__list">
-        <li
-          class="list__search"
-          ng-repeat="item in list.searchResults track by $index"
-          ng-click="list.addFoodItem(item.id)">
-          <span md-highlight-text="list.searchText" md-highlight-flags="^i">
-            {{item.text}}
-          </span>
-        </li>
-      </ul>
-    </section>
+
 </main>
