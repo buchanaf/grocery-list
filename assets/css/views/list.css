@@ -127,12 +127,12 @@ input[type=checkbox]:checked + label:after {
 }
 
 .search {
-  background: #fff;
+  background: #f5f7f8;
   box-shadow: 0px 1px 10px 1px rgba(182,186,189,1);
   border-radius: 5px;
   border: 1px solid #00aaff;
   left: 0;
-  min-height: 20rem;
+  height: 20rem;
   position: absolute;
   transform: translateX(-50%);
   width: 300px;
@@ -171,23 +171,30 @@ input[type=checkbox]:checked + label:after {
 
 .input--search {
   border-radius: 5px;
-  width: 100%;
   display: inline-block;
+  position: relative;
+  width: 100%;
 }
 
 .search__list {
+  height: calc(20rem - 5rem);
+  overflow-y: scroll;
   padding: 0.25rem 0.5rem;
-  height: calc(100% - 4rem);
-  overflow-y: auto;
 }
 
 .search__item {
-  background: #fff;
+  background-color: #fff;
   border-radius: 5px;
   box-shadow: 0px 1px 1px 0px rgba(130,145,153,0.5);
+  cursor: pointer;
   line-height: 2rem;
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
   position: relative;
   vertical-align: middle;
+}
+
+.search__item:hover {
+  background-color: var(--grey-light);
+  opacity: 0.9;
 }

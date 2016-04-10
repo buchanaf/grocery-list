@@ -13,7 +13,7 @@ export const List = Bookshelf.Model.extend({
       'quantity',
       'measurement',
       'category',
-    ]);
+    ]).query('orderBy', 'complete');
   },
 
   user: function user() {

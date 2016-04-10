@@ -2,6 +2,8 @@ export default function listService($interval, $log, $http) {
   const listData = {
     selectedList: null,
     lists: [],
+    query: [],
+    queryLoading: false,
   };
 
   return {
@@ -20,6 +22,20 @@ export default function listService($interval, $log, $http) {
     setList: (id) => {
       listData.selectedList = listData.lists.filter(list => parseInt(id, 10) === list.id)[0];
     },
+
+    addQuery: (query) => { listData.query.push(query); },
+
+    popQuery: () => {
+      const query = listData.query.pop();
+      listData.query = [];
+      return query;
+    },
+
+    queryStack: () => listData.query,
+
+    getQueryLoading: () => listData.queryLoading,
+
+    setQueryLoading: (status) => { listData.queryLoading = status; },
 
     getFoodOptions: (query) => $http.get(`/api/food?q=${query}`),
 

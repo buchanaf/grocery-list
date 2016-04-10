@@ -1,6 +1,5 @@
 export default function listController(ListService, AuthService, $location, $routeParams, initialData, $scope ) {//eslint-disable-line
   const listData = ListService.getState();
-
   if (!listData.selectedlist) {
     ListService.setList($routeParams.id);
   }
@@ -11,6 +10,7 @@ export default function listController(ListService, AuthService, $location, $rou
 
   this.foods = this.current.relations.foods;
   this.searchShow = false;
+  this.searchLoading = () => ListService.getQueryLoading();
 
   this.searchResults = [];
   this.cache = true;
@@ -21,7 +21,9 @@ export default function listController(ListService, AuthService, $location, $rou
 
   this.filterCompleted = (food) => food._pivot_complete;
 
-  this.toggleSearch = () => this.searchShow = !this.searchShow,
+  this.toggleSearch = () => {//eslint-disable-line
+    this.searchShow = !this.searchShow;//eslint-disable-line
+  };
 
   this.onCompletionChange = (index) => {
     ListService.updateFoodRelations(this.foods[index]);
@@ -38,14 +40,27 @@ export default function listController(ListService, AuthService, $location, $rou
       this.foods = foods;
       this.searchResults = [];
       this.searchText = '';
+      this.toggleSearch();
     });
 
   this.querySearch = (query) => {
-    if (query === '') { return []; }
+    if (query === '') {
+      this.searchResults = [];
+      return;
+    }
 
-    return ListService.getFoodOptions(query)
-      .then((foods) => {
-        this.searchResults = foods.data;
-      });
+    ListService.addQuery(query);
+    if (ListService.getQueryLoading()) { return; }
+
+    ListService.setQueryLoading(true);
+
+    ListService.getFoodOptions(ListService.popQuery()).then((foods) => {
+      ListService.setQueryLoading(false);
+      this.searchResults = foods.data;
+
+      if (ListService.queryStack().length) {
+        this.querySearch(ListService.popQuery());
+      }
+    });
   };
 }
