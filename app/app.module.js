@@ -5,6 +5,7 @@ import ngAria from 'angular-aria';
 import routes from './app.routes';
 import services from './services';
 import controllers from './controllers';
+import ngDialog from 'ng-dialog';
 
 const app = [services, routes, controllers];//eslint-disable-line
 
@@ -13,6 +14,7 @@ angular
     ngRoute,
     ngAnimate,
     ngAria,
+    ngDialog,
     'app.services',
     'app.controllers',
     'app.routes',

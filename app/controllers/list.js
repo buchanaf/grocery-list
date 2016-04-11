@@ -1,4 +1,4 @@
-export default function listController(ListService, AuthService, $location, $routeParams, initialData, $scope ) {//eslint-disable-line
+export default function listController(ListService, AuthService, $location, $routeParams, initialData, $scope, ngDialog ) {//eslint-disable-line
   const listData = ListService.getState();
   if (!listData.selectedlist) {
     ListService.setList($routeParams.id);
@@ -62,5 +62,9 @@ export default function listController(ListService, AuthService, $location, $rou
         this.querySearch(ListService.popQuery());
       }
     });
+  };
+
+  this.openDataModal = () => {
+    ngDialog.open({ template: 'food-meta.html', className: 'ngdialog-theme-default' });
   };
 }

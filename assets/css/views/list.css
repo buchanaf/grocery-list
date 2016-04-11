@@ -24,22 +24,6 @@
   overflow-y: auto;
 }
 
-.list__item {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 1px 1px 0px rgba(130,145,153,0.5);
-  line-height: 2rem;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
-  position: relative;
-  vertical-align: middle;
-}
-
-.list__item > div {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 .list::-webkit-scrollbar {
   height: 8px;
   width: 8px;
@@ -52,6 +36,29 @@
 
 .list::-webkit-scrollbar-track {
   background: inherit;
+}
+
+.list__item {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 1px 1px 0px rgba(130,145,153,0.5);
+  cursor: pointer;
+  line-height: 2rem;
+  margin: 0.5rem 0;
+  outline: none;
+  padding: 0.5rem 1rem;
+  position: relative;
+  vertical-align: middle;
+}
+
+.list__item:hover {
+  background-color: var(--grey-light);
+  opacity: 0.8;
+}
+
+.list__item > div {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .list__input {

@@ -1,7 +1,12 @@
 .input {
   border: none;
+  border-radius: 5px;
   line-height: 1.5rem;
   margin-right: 1rem;
   outline: none;
   padding: 0.5rem 1rem;
+}
+
+.input--short {
+  width: 3rem;
 }

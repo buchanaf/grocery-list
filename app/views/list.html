@@ -55,7 +55,7 @@
         Grocery List
       </h3>
       <ul class="grocery__list">
-        <li class="list__item clearfix" ng-repeat="food in list.foods track by $index">
+        <li class="list__item clearfix" ng-repeat="food in list.foods track by $index" ng-click="list.openDataModal()">
           <span class="left">
             {{food.name}}
           </span>
@@ -66,5 +66,25 @@
         </li>
       </ul>
     </section>
-
+    <script type="text/ng-template" id="food-meta.html">
+      <section class="dialog__container">
+        <label class="dialog__label">
+          Quantity:
+          <input class="input input--short dialog__input" />
+        </label>
+        <label class="dialog__label">
+          Measurement
+          <select class="dialog__select">
+            <option value="cup" />
+              Cup
+            </select>
+          </select>
+        </label>
+        <label>
+          Notes:
+        <label>
+        <textarea class="dialog__textarea" value="textarea">
+        </textarea>
+      </section>
+    </script>
 </main>

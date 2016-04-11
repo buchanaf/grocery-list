@@ -1,3 +1,7 @@
+
+@import '../../node_modules/ng-dialog/css/ngDialog.min.css';
+/*@import '../../node_modules/ng-dialog/css/ngDialog-theme-plain.min.css';*/
+@import '../../node_modules/ng-dialog/css/ngDialog-theme-default.min.css';
 /* COMPONENT CSS FILES */
 @import 'helpers';
 @import 'fonts';
