@@ -15,9 +15,15 @@
   right: 1rem;
 }
 
+.icon--friends,
 .icon--search {
   cursor: pointer;
   vertical-align: middle;
+}
+
+.icon--friends {
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .icon--show {
@@ -44,6 +50,7 @@
   display: none;
 }
 
+.icon--friends:hover,
 .icon--search:hover {
   fill: #8f7ee6;
 }

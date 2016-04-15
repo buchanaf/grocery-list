@@ -10,11 +10,13 @@ export default function listController(ListService, AuthService, $location, $rou
 
   this.foods = this.current.relations.foods;
   this.searchShow = false;
+  this.friendShow = false;
   this.searchLoading = () => ListService.getQueryLoading();
 
   this.searchResults = [];
   this.cache = true;
   this.lists = initialData.lists;
+  this.foodModal = null;
 
   this.searchText = '';
   this.listName = '';
@@ -22,10 +24,17 @@ export default function listController(ListService, AuthService, $location, $rou
   this.filterCompleted = (food) => food._pivot_complete;
 
   this.toggleSearch = () => {//eslint-disable-line
+    this.friendShow = false;
     this.searchShow = !this.searchShow;//eslint-disable-line
   };
 
-  this.onCompletionChange = (index) => {
+  this.toggleFriendSearch = () => {//eslint-disable-line
+    this.searchShow = false;
+    this.friendShow = !this.friendShow;//eslint-disable-line
+  };
+
+  this.onCompletionChange = (index, $event) => {
+    $event.stopPropagation();
     ListService.updateFoodRelations(this.foods[index]);
   };
 
@@ -64,7 +73,8 @@ export default function listController(ListService, AuthService, $location, $rou
     });
   };
 
-  this.openDataModal = () => {
+  this.openDataModal = (food) => {
+    this.foodModal = food;
     ngDialog.open({ template: 'food-meta.html', className: 'ngdialog-theme-default' });
   };
 }

@@ -1,16 +1,19 @@
 .dialog__container {
+  margin: 2.5rem auto 0 auto;
   width: 300px;
 }
 
 .dialog__label {
   display: block;
+  line-height: 2.5rem;
   margin: 0.75rem 0;
+  position: relative;
 }
 
 .dialog__textarea {
   border-radius: 5px;
-  display: block;
   min-height: 5rem;
+  padding: 0.5rem;
   resize: none;
   width: 100%;
 }
@@ -22,5 +25,8 @@
 }
 
 .dialog__select {
-  float: right;
+  position: absolute;
+  right: 0;
+  top: 0.75rem;
 }
+
