@@ -73,6 +73,29 @@ export default function listController(ListService, AuthService, $location, $rou
     });
   };
 
+  this.friendSearch = (query) => {
+    if (query === '') {
+      this.searchResults = [];
+      return;
+    }
+
+    ListService.addQuery(query);
+    if (ListService.getQueryLoading()) {
+      return;
+    }
+
+    ListService.setQueryLoading(true);
+
+    ListService.getFoodOptions(ListService.popQuery()).then((foods) => {
+      ListService.setQueryLoading(false);
+      this.searchResults = foods.data;
+
+      if (ListService.queryStack().length) {
+        this.querySearch(ListService.popQuery());
+      }
+    });
+  };
+
   this.openDataModal = (food) => {
     this.foodModal = food;
     ngDialog.open({ template: 'food-meta.html', className: 'ngdialog-theme-default' });

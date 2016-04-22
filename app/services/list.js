@@ -4,6 +4,8 @@ export default function listService($interval, $log, $http) {
     lists: [],
     query: [],
     queryLoading: false,
+    friend: [],
+    friendLoading: false,
   };
 
   return {
@@ -36,6 +38,20 @@ export default function listService($interval, $log, $http) {
     getQueryLoading: () => listData.queryLoading,
 
     setQueryLoading: (status) => { listData.queryLoading = status; },
+
+    addFriend: (query) => { listData.friend.push(query); },
+
+    popFriend: () => {
+      const query = listData.friend.pop();
+      listData.friend = [];
+      return query;
+    },
+
+    friendStack: () => listData.friend,
+
+    getFriendLoading: () => listData.friendLoading,
+
+    setFriendLoading: (status) => { listData.friendLoading = status; },
 
     getFoodOptions: (query) => $http.get(`/api/food?q=${query}`),
 
