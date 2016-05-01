@@ -1,5 +1,5 @@
 import angular from 'angular' ;
-console.log('here');
+
 export default () => ({
   restrict: 'A',
   link: (scope, elem, attrs) => {
