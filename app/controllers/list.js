@@ -19,9 +19,7 @@ export default function listController(ListService, AuthService, $location,
 
   this.listName = '';
 
-  this.filterCompleted = (food) => {
-    return food._pivot_complete;
-  };
+  this.filterCompleted = (food) => food._pivot_complete;
 
   this.toggleFriendSearch = () => {//eslint-disable-line
     this.searchShow = false;

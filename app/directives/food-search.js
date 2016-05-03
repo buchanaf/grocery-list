@@ -9,14 +9,18 @@ export default () => ({
 
     this.searchLoading = () => ListService.getQueryLoading();
 
-    this.addFoodItem = (id, listId) => ListService.postFoodItem(id, listId)
-      .then((foods) => {
-        $scope.list.current.relations.foods = foods;//eslint-disable-line
-        $scope.list.foods = foods;//eslint-disable-line
-        $scope.list.toggleSearch();
-        this.searchResults = [];
-        this.searchText = '';
-      });
+    this.addFoodItem = (id, listId) => {
+      if ($scope.list.foods.filter((f) => f.id !== id)) {
+        ListService.postFoodItem(id, listId)
+          .then((foods) => {
+            $scope.list.current.relations.foods = foods;//eslint-disable-line
+            $scope.list.foods = foods;//eslint-disable-line
+            $scope.list.toggleSearch();
+            this.searchResults = [];
+            this.searchText = '';
+          });
+      }
+    };
 
     this.querySearch = (query) => {
       if (query === '') {
@@ -38,7 +42,6 @@ export default () => ({
         }
       });
     };
-
   },
 });
 

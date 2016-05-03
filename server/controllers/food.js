@@ -58,13 +58,16 @@ export function addToList(req, res) {
       category: 'deli',
       notes: 'did this work?',
     }]))
-    .then((ListCollection) => {
-      ListCollection.fetch()
-        .then((foods) => {
-          res.json({
-            data: foods,
-          });
+    .then(() => {
+      List.forge({
+        id: req.body.list,
+      })
+      .fetch({ withRelated: ['foods'] })
+      .then((updatedList) => {
+        res.json({
+          data: updatedList.foods,
         });
+      });
     })
     .catch((err) => {
       res.status(500);

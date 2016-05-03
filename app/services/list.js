@@ -58,6 +58,7 @@ export default function listService($interval, $log, $http) {
     postFoodItem: (food, list) => $http.post('/api/food', { food, list })
       .then((results) => {
         listData.selectedList.foods = results.data.data;
+        console.log(results.data.data.length);
         return results.data.data;
       }),
 
