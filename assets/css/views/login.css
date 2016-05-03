@@ -1,0 +1,32 @@
+.title--login {
+  margin-top: 4rem;
+}
+
+.login__section {
+  background: rgba(255, 255, 255, 0.6);
+  left: 50%;
+  height: 6rem;
+  padding: 1rem;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+.login:before {
+  background: url('/dist/img/login-background.jpg') no-repeat fixed center center;
+  background-size: cover;
+  bottom: 0;
+  content: "";
+  opacity: 0.7;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.login__formset {
+  position: relative;
+}

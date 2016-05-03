@@ -1,53 +1,66 @@
+
+<header class="header">
+  <h2 class="header__title">
+    <svg class="header__logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+      <path fill="#444" d="M3.5 0c-1.657 0-3 1.567-3 3.5 0 1.655 0.985 3.042 2.308 3.406l-0.497 8.096c-0.034 0.549 0.389 0.998 0.939 0.998h0.5c0.55 0 0.972-0.449 0.939-0.998l-0.497-8.096c1.323-0.365 2.308-1.751 2.308-3.406 0-1.933-1.343-3.5-3-3.5zM13.583 0l-0.833 5h-0.625l-0.417-5h-0.417l-0.417 5h-0.625l-0.833-5h-0.417v6.5c0 0.276 0.224 0.5 0.5 0.5h1.302l-0.491 8.002c-0.034 0.549 0.389 0.998 0.939 0.998h0.5c0.55 0 0.972-0.449 0.939-0.998l-0.491-8.002h1.302c0.276 0 0.5-0.224 0.5-0.5v-6.5h-0.417z"></path>
+    </svg>
+    Bobbi-Shopz
+  </h2>
+  <aside class="header__aside">
+    <ul class="header__list">
+      <li class="header__list-item header__list-item--search" ng-class="{'header__list-item--show': list.searchShow}">
+        <food-search />
+      </li>
+      <li class="header__list-item header__list-item--search" ng-class="{'header__list-item--show': list.friendShow}">
+      </li>
+      <li class="header__list-item">
+        Total: {{list.foods.length}}
+      </li>
+      <li class="header__list">
+        Completed: {{(list.foods | filter:list.filterCompleted).length}}
+      </li>
+    </ul>
+  </aside>
+</header>
 <main class="main">
-    <div class="list__container">
-      <section class="list__column">
-        <h3 class="subtitle list__subtitle list__subtitle--primary">
-          Open items
-        </h3>
-        <ul class="list">
-          <li class="list__item" ng-repeat="food in list.current.relations.foods track by $index">
-            {{ food.name }}
-            <button class="button right" ng-click="list.deleteFood(food.id)">
-              Delete
-            </button>
-          </li>
-        </ul>
+  <div class="list__container">
+    <section class="list__column">
+      <h3 class="subtitle list__subtitle list__subtitle--primary">
+        Grocery List
+      </h3>
+      <ul class="grocery__list">
+        <li class="list__item clearfix" ng-repeat="food in list.foods track by $index" ng-click="list.openDataModal(food); $event.stopPropagation();">
+          <span class="left">
+            {{food.name}}
+          </span>
+          <div class="checkbox right">
+            <input type="checkbox" ng-click="list.onCompletionChange($index, $event);" id="checkbox-{{$index}}" ng-model="food._pivot_complete" value="none" name="checkbox"/>
+            <label class="checkbox__label" for="checkbox-{{$index}}" ng-click="$event.stopPropagation()"></label>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <script type="text/ng-template" id="food-meta.html">
+      <section class="dialog__container">
+        <div class="dialog__inner-container">
+          <label class="dialog__label">
+            Quantity:
+            <input input-limit="2" class="input input--short dialog__input" />
+          </label>
+          <label class="dialog__label">
+            Measurement:
+            <select class="dialog__select">
+              <option value="cup" />
+                Cup
+              </select>
+            </select>
+          </label>
+          <label class="dialog__label">
+            Notes:
+          <label>
+          <textarea class="dialog__textarea" value="textarea">
+          </textarea>
+        </div>
       </section>
-      <section class="list__column">
-        <h3 class="subtitle list__subtitle list__subtitle--secondary">
-          Closed Items
-        </h3>
-        <ul class="list">
-          <li class="list__item" ng-repeat="food in list.current.relations.foods track by $index">
-            {{ food.name }}
-            <button class="button right" ng-click="list.deleteFood(food.id)">
-              Delete
-            </button>
-          </li>
-        </ul>
-      </section>
-      <section class="list__column">
-        <h3 class="subtitle list__subtitle list__subtitle--ternary">
-          Add Items
-        </h3>
-        <input
-          class="input list__input"
-          ng-model="list.searchText"
-          ng-minlength="1"
-          ng-change="list.querySearch(list.searchText)"
-          placeholder="Find food" />
-          <ul>
-            <li class="list__search" ng-repeat="item in list.searchResults track by $index" ng-click="list.addFoodItem(item.id)">
-              <span md-highlight-text="list.searchText" md-highlight-flags="^i">
-                {{item.text}}
-              </span>
-            </li>
-          </ul>
-      </section>
-      <section class="list__column">
-        <h3 class="subtitle list__subtitle list__subtitle--ternary">
-          Shared With
-        </h3>
-      </section>
-    </div>
+    </script>
 </main>

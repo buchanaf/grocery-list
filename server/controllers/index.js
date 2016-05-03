@@ -20,6 +20,9 @@ router.route('/api/list')
   .delete(ListAPI.deleteList)
   .put(ListAPI.updateList);
 
+router.route('/api/list_relations')
+  .put(ListAPI.updateFoodRelations);
+
 router.get('/auth/facebook',
   passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 

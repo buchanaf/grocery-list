@@ -1,0 +1,39 @@
+.header {
+  border-bottom: 1px solid #00aaff;
+  display: block;
+  background-color: #ebf0f2;
+  line-height: 4rem;
+  width: 100%;
+}
+
+.header__title {
+  display: inline-block;
+  font-size: 2rem;
+  margin-left: 3rem;
+}
+
+.header__logo {
+  font-size: 2rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.header__aside {
+  display: inline-block;
+  float: right;
+  line-height: 4rem;
+  margin-right: 3rem;
+}
+
+.header__list {
+  display: inline-block;
+}
+
+.header__list-item {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.header__list-item--search {
+  position: relative;
+}

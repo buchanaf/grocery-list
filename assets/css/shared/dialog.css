@@ -1,0 +1,32 @@
+.dialog__container {
+  margin: 2.5rem auto 0 auto;
+  width: 300px;
+}
+
+.dialog__label {
+  display: block;
+  line-height: 2.5rem;
+  margin: 0.75rem 0;
+  position: relative;
+}
+
+.dialog__textarea {
+  border-radius: 5px;
+  min-height: 5rem;
+  padding: 0.5rem;
+  resize: none;
+  width: 100%;
+}
+
+.dialog__input {
+  line-height: 1rem;
+  margin-right: 0;
+  float: right;
+}
+
+.dialog__select {
+  position: absolute;
+  right: 0;
+  top: 0.75rem;
+}
+
